@@ -194,7 +194,7 @@
         /* About Section */
         .about {
             padding: 8rem 0;
-            background: #fafafa;
+            background: #ffffff;
         }
 
         .container {
@@ -949,4 +949,13 @@
       background: url("assets/images/pexels-scottwebb-136413.jpg") no-repeat center center/cover;
     }
 
+
+.service-icon img {
+    width: 60px;      /* adjust as needed */
+    height: 60px;     /* adjust as needed */
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;   /* center the icon */
+     opacity: 0.6;
+}
 
