@@ -1,0 +1,16 @@
+<!-- index.html -->
+<div id="navbar"></div>
+
+<h1>Welcome</h1>
+
+<div id="footer"></div>
+
+<script>
+  async function loadHTML(id, file) {
+    const res = await fetch(file);
+    document.getElementById(id).innerHTML = await res.text();
+  }
+
+  loadHTML("navbar", "navbar.html");
+  loadHTML("footer", "footer.html");
+</script>
