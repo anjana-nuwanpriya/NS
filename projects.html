@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - NS Holdings Engineering Pvt Ltd</title>
+    <style>
+        /* Additional styles for projects page */
+        .projects-hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("assets/images/pexels-scottwebb-136413.jpg") no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+        }
+
+        .projects-hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .projects-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .projects-hero p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Projects Stats Section */
+        .projects-stats {
+            background: #2c2c2c;
+            color: white;
+            padding: 6rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem 1rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 100;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        /* Featured Projects Section */
+        .featured-projects {
+            padding: 8rem 0;
+            background: #f8f9fa;
+        }
+
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0 5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid #666;
+            background: transparent;
+            color: #666;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #666;
+            color: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            color: white;
+            z-index: 2;
+        }
+
+        .project-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-location {
+            font-size: 0.9rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .project-year {
+            font-weight: 500;
+        }
+
+        .project-status {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-completed {
+            background: #e8f5e8;
+            color: #2e7d2e;
+        }
+
+        .status-ongoing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-upcoming {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        /* Mobile Navigation */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                transition: 0.3s;
+                padding-top: 100px;
+                gap: 2rem;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+
+            .nav-menu a {
+                font-size: 1.2rem;
+                padding: 1rem;
+                display: block;
+            }
+
+            .search-icon {
+                margin-top: 2rem;
+            }
+
+            .projects-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .projects-hero p {
+                font-size: 1.1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-filter {
+                gap: 1rem;
+                margin: 2rem 0 3rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .project-content {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .project-details {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Project Background Images */
+        .project-1 { background-image: url("assets/images/pexels-pixabay-256490.jpg"); }
+        .project-2 { background-image: url("assets/images/pexels-negativespace-48604.jpg"); }
+        .project-3 { background-image: url("assets/images/pexels-aleksandar-pasaric-325229.jpg"); }
+        .project-4 { background-image: url("assets/images/pexels-rethaferguson-3810792.jpg"); }
+        .project-5 { background-image: url("assets/images/pexels-scottwebb-136413.jpg"); }
+        .project-6 { background-image: url("assets/images/pexels-binyaminmellish-106399.jpg"); }
+        .project-7 { background-image: url("assets/images/pexels-roger-brown-3435524-5125690.jpg"); }
+        .project-8 { background-image: url("assets/images/pexels-pixabay-256490.jpg"); }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scroll-progress"></div>
+    </div>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <!-- Logo links to index.html -->
+        <div class="logo-section">
+            <a href="index.html">
+                <img src="assets/images/logo (1).png" alt="Logo" class="logo-image">
+            </a>
+        </div>
+
+        <!-- Nav menu -->
+        <ul class="nav-menu">
+            <li><a href="expertise.html">EXPERTISE</a></li>
+            <li><a href="projects.html">PROJECTS</a></li>
+            <li><a href="careers.html">CAREERS</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+            <li><a href="search.html" class="search-icon" style="color:white;">🔍</a></li>
+        </ul>
+
+        <!-- Hamburger menu -->
+        <div class="hamburger">
+            <a href="menu.html">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Projects Hero Section -->
+    <section class="projects-hero">
+        <div class="projects-hero-content">
+            <h1>Our Projects</h1>
+            <p>Showcasing excellence through innovative engineering solutions across Sri Lanka and the Asian region with a portfolio spanning over a decade of successful project delivery.</p>
+        </div>
+    </section>
+
+    <!-- Projects Statistics Section -->
+    <section class="projects-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <span class="stat-number">300+</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat-item fade-in">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item fade-in">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Countries Served</span>
+                </div>
+                <div class="stat-item fade-in">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Client Satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <!-- Project Filter Buttons -->
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="educational">Educational</button>
+                <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+                <button class="filter-btn" data-filter="corporate">Corporate</button>
+                <button class="filter-btn" data-filter="production">Industrial</button>
+                <button class="filter-btn" data-filter="residential">Residential</button>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Educational Project -->
+                <div class="project-card fade-in" data-category="educational">
+                    <div class="project-image project-1">
+                        <div class="project-info">
+                            <div class="project-category">Educational Infrastructure</div>
+                            <h3 class="project-title">International School Complex</h3>
+                            <div class="project-location">Colombo, Sri Lanka</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">A state-of-the-art educational facility designed to accommodate 1,500 students with modern classrooms, laboratories, sports facilities, and administrative buildings.</p>
+                        <div class="project-details">
+                            <span class="project-year">2023</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Healthcare Project -->
+                <div class="project-card fade-in" data-category="healthcare">
+                    <div class="project-image project-2">
+                        <div class="project-info">
+                            <div class="project-category">Healthcare Facilities</div>
+                            <h3 class="project-title">Regional Medical Center</h3>
+                            <div class="project-location">Kandy, Sri Lanka</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">A comprehensive healthcare facility with 200-bed capacity, emergency services, surgical suites, and specialized treatment units serving the Central Province.</p>
+                        <div class="project-details">
+                            <span class="project-year">2024</span>
+                            <span class="project-status status-ongoing">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corporate Project -->
+                <div class="project-card fade-in" data-category="corporate">
+                    <div class="project-image project-3">
+                        <div class="project-info">
+                            <div class="project-category">Corporate Complex</div>
+                            <h3 class="project-title">Tech Hub Office Tower</h3>
+                            <div class="project-location">Colombo, Sri Lanka</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">A 25-story modern office complex designed for technology companies with sustainable features, flexible workspaces, and advanced building management systems.</p>
+                        <div class="project-details">
+                            <span class="project-year">2022</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industrial Project -->
+                <div class="project-card fade-in" data-category="production">
+                    <div class="project-image project-4">
+                        <div class="project-info">
+                            <div class="project-category">Industrial Facility</div>
+                            <h3 class="project-title">Manufacturing Complex</h3>
+                            <div class="project-location">Gampaha, Sri Lanka</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">A large-scale textile manufacturing facility with production halls, warehousing, administrative offices, and worker facilities designed for optimal operational efficiency.</p>
+                        <div class="project-details">
+                            <span class="project-year">2023</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Landscape Project -->
+                <div class="project-card fade-in" data-category="landscape">
+                    <div class="project-image project-5">
+                        <div class="project-info">
+                            <div class="project-category">Urban Development</div>
+                            <h3 class="project-title">City Park & Recreation Center</h3>
+                            <div class="project-location">Galle, Sri Lanka</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">An integrated urban development project featuring public parks, recreational facilities, community centers, and sustainable landscaping for enhanced city living.</p>
+                        <div class="project-details">
+                            <span class="project-year">2024</span>
+                            <span class="project-status status-ongoing">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Residential Project -->
+                <div class="project-card fade-in" data-category="residential">
+                    <div class="project-image project-6">
+                        <div class="project-info">
+                            <div class="project-category">Residential Development</div>
+                            <h3 class="project-title">Luxury Apartment Complex</h3>
+                            <div class="project-location">Mount Lavinia, Sri Lanka</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">Premium residential towers with 150 luxury apartments, rooftop amenities, parking facilities, and landscaped gardens offering modern urban living.</p>
+                        <div class="project-details">
+                            <span class="project-year">2025</span>
+                            <span class="project-status status-upcoming">Upcoming</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- International Project -->
+                <div class="project-card fade-in" data-category="educational">
+                    <div class="project-image project-7">
+                        <div class="project-info">
+                            <div class="project-category">International Project</div>
+                            <h3 class="project-title">University Campus</h3>
+                            <div class="project-location">Malé, Maldives</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">A comprehensive university campus development in the Maldives featuring academic buildings, student housing, research facilities, and recreational areas.</p>
+                        <div class="project-details">
+                            <span class="project-year">2023</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corporate International -->
+                <div class="project-card fade-in" data-category="corporate">
+                    <div class="project-image project-8">
+                        <div class="project-info">
+                            <div class="project-category">Corporate Complex</div>
+                            <h3 class="project-title">Business Center</h3>
+                            <div class="project-location">Dhaka, Bangladesh</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">A multi-use business complex in Bangladesh featuring office spaces, conference facilities, retail areas, and parking, designed to international standards.</p>
+                        <div class="project-details">
+                            <span class="project-year">2022</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Company Logo -->
+            <div class="footer-logo">
+                <img src="assets/images/black.png" alt="Company Logo">
+            </div>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>General</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Expertise</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Expertise</h3>
+                    <ul>
+                        <li><a href="#">Educational Infrastructure</a></li>
+                        <li><a href="#">Healthcare Facilities</a></li>
+                        <li><a href="#">Corporate Office Complexes</a></li>
+                        <li><a href="#">Production Facility Infrastructure</a></li>
+                        <li><a href="#">Landscape & Urbanism</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Social</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Copyright © 2025 NS Holdings Engineering Private Limited . Designed by @ZIP SOLUTIONS</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            // Mobile menu functionality
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navMenu.contains(event.target);
+                const isClickOnHamburger = hamburger.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+
+            // Project filtering functionality
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    projectCards.forEach(card => {
+                        if (filterValue === 'all') {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else if (card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Initialize filter transition styles
+            projectCards.forEach(card => {
+                card.style.transition = 'all 0.3s ease';
+            });
+        });
+    </script>
+</body>
+</html>
