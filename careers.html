@@ -6,6 +6,278 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Careers - NS Holdings Engineering Pvt Ltd</title>
     <style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   NAVBAR / HEADER
+========================= */
+.navbar {
+    position: absolute; /* absolute for overlay effect on hero */
+    margin-top: -20px;  /* adjust top spacing */
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.logo::before {
+    content: "◊"; /* decorative symbol before logo */
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-menu a:hover {
+    color: #f0f0f0;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+    width: 100%; /* underline animation on hover */
+}
+
+.search-icon {
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Logo section with image + text */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-image {
+    width: auto;
+    height: 50px;
+    border-radius: 0px;
+    object-fit: contain;
+    margin-top: 13px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+}
+
+.logo-text:hover {
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+/* =========================
+   NAVBAR RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* hide menu on small screens */
+    }
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+    background: #ffffff;
+    color: white;
+    padding: 4rem 0 2rem;
+}
+
+.footer-logo {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: -12px;
+}
+
+.footer-logo img {
+    max-width: 350px;
+    height: auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.footer-content .footer-section:last-child {
+    margin-left: 250px;  /* adjust if needed */
+    margin-top: 20px;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.5rem;
+    color: #000000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 15px;
+}
+
+.footer-section p {
+    color: #a8a8a8;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+    color: #9e9e9e;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 300;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    border-top: 1px solid #c5c5c5;
+    padding-top: 2rem;
+    text-align: center;
+    color: #b9b9b9;
+    font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* Additional styles for careers page */
         .careers-hero {
             height: 70vh;
