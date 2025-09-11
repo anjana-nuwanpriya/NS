@@ -37,39 +37,43 @@
 
         /* Mobile Menu Styles */
         @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
+     
 
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 0;
-                flex-direction: column;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
-                width: 100%;
-                height: 100vh;
-                text-align: center;
-                transition: 0.3s;
-                padding-top: 100px;
-                gap: 2rem;
-                z-index: 1001;
-            }
+        .nav-menu {
+        position: fixed;
+        top: 0;
+        left: -100%; /* hidden by default */
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.95);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transition: left 0.3s ease;
+        z-index: 1001;
+    }
 
-            .nav-menu.active {
-                left: 0;
-            }
+    .nav-menu.active {
+        left: 0; /* slide into view */
+    }
 
-            .nav-menu li {
-                margin: 1rem 0;
-            }
+    .nav-menu a {
+        color: #fff; /* make links visible */
+        font-size: 1.2rem;
+        text-decoration: none;
+    }
 
-            .nav-menu a {
-                font-size: 1.2rem;
-                padding: 1rem;
-                display: block;
-            }
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        z-index: 1002;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+    }
 
             .search-icon {
                 margin-top: 2rem;
@@ -102,11 +106,11 @@
 
         <!-- Hamburger menu -->
         <div class="hamburger">
-            <a href="menu.html">
+         
                 <span></span>
                 <span></span>
                 <span></span>
-            </a>
+           
         </div>
     </div>
 </nav>
