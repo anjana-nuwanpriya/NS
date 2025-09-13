@@ -183,12 +183,7 @@
 /* =========================
    FOOTER
 ========================= */
-.footer {
-    background: #ffffff;
-    color: white;
-    padding: 4rem 0 2rem;
-}
-
+/* Footer */
 .footer-logo {
     text-align: left;
     margin-bottom: 20px;
@@ -198,6 +193,13 @@
 .footer-logo img {
     max-width: 350px;
     height: auto;
+    width: 100%; /* Ensure image scales properly */
+}
+
+.footer {
+    background: #ffffff;
+    color: white;
+    padding: 4rem 0 2rem;
 }
 
 .footer-content {
@@ -206,10 +208,11 @@
     gap: 3rem;
     margin-bottom: 3rem;
     text-align: left;
+    padding: 0 1rem; /* Add horizontal padding for mobile */
 }
 
 .footer-content .footer-section:last-child {
-    margin-left: 250px;  /* adjust if needed */
+    margin-left: 250px;
     margin-top: 20px;
 }
 
@@ -230,6 +233,7 @@
 
 .footer-section ul {
     list-style: none;
+    padding: 0; /* Remove default padding */
 }
 
 .footer-section ul li {
@@ -253,6 +257,138 @@
     text-align: center;
     color: #b9b9b9;
     font-weight: 300;
+    padding-left: 1rem; /* Add horizontal padding */
+    padding-right: 1rem;
+}
+
+/* Mobile Responsive Breakpoints */
+
+/* Large tablets and small laptops (1024px and down) */
+@media screen and (max-width: 1024px) {
+    .footer {
+        padding: 3rem 0 1.5rem;
+    }
+    
+    .footer-content .footer-section:last-child {
+        margin-left: 100px; /* Reduce margin on smaller screens */
+    }
+    
+    .footer-logo img {
+        max-width: 300px;
+    }
+}
+
+/* Tablets (768px and down) */
+@media screen and (max-width: 768px) {
+    .footer {
+        padding: 2.5rem 0 1.5rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        padding: 0 1.5rem;
+    }
+    
+    .footer-content .footer-section:last-child {
+        margin-left: 0; /* Remove special margin on tablets */
+        margin-top: 0;
+    }
+    
+    .footer-logo {
+        text-align: center; /* Center logo on tablets */
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
+    
+    .footer-logo img {
+        max-width: 250px;
+    }
+    
+    .footer-section h3 {
+        font-size: 14px;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Mobile phones (480px and down) */
+@media screen and (max-width: 480px) {
+    .footer {
+        padding: 2rem 0 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 1.5rem;
+        padding: 0 1rem;
+        text-align: center; /* Center align content on mobile */
+    }
+    
+    .footer-logo {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    
+    .footer-logo img {
+        max-width: 200px;
+    }
+    
+    .footer-section h3 {
+        font-size: 13px;
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+    }
+    
+    .footer-section p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    .footer-section ul li {
+        margin-bottom: 0.6rem;
+    }
+    
+    .footer-section ul li a {
+        font-size: 14px;
+    }
+    
+    .footer-bottom {
+        padding-top: 1.5rem;
+        font-size: 12px;
+    }
+}
+
+/* Extra small mobile phones (360px and down) */
+@media screen and (max-width: 360px) {
+    .footer {
+        padding: 1.5rem 0 1rem;
+    }
+    
+    .footer-content {
+        padding: 0 0.5rem;
+        gap: 1rem;
+    }
+    
+    .footer-logo img {
+        max-width: 180px;
+    }
+    
+    .footer-section h3 {
+        font-size: 12px;
+        letter-spacing: 0.5px;
+    }
+    
+    .footer-section p {
+        font-size: 13px;
+    }
+    
+    .footer-section ul li a {
+        font-size: 13px;
+    }
+    
+    .footer-bottom {
+        font-size: 11px;
+    }
 }
 
 
