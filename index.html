@@ -171,9 +171,9 @@
     <!-- LOADING SCREEN -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-container">
-            <div class="loading-logo">
+            <!-- <div class="loading-logo">
                 <img src="assets/images/logo (1).png" alt="NS Holdings Logo">
-            </div>
+            </div> -->
             <div class="spinner"></div>
             <div class="loading-text">Loading NS Holdings</div>
             <div class="progress-bar-container">
@@ -482,13 +482,6 @@
                 clearInterval(progressInterval);
                 hideLoadingScreen();
             });
-
-            // Backup timeout: Hide loading screen after 30 seconds if video hasn't played yet
-            setTimeout(() => {
-                clearInterval(progressInterval);
-                updateProgress(100);
-                hideLoadingScreen();
-            }, 30000);
         });
 
         // Mobile menu toggle functionality
