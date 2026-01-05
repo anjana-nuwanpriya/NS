@@ -171,9 +171,9 @@
     <!-- LOADING SCREEN -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-container">
-            <!-- <div class="loading-logo">
+            <div class="loading-logo">
                 <img src="assets/images/logo (1).png" alt="NS Holdings Logo">
-            </div> -->
+            </div>
             <div class="spinner"></div>
             <div class="loading-text">Loading NS Holdings</div>
             <div class="progress-bar-container">
@@ -216,7 +216,7 @@
 
     <section id="home" class="hero">
         <!-- Background Video -->
-        <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
+        <video autoplay muted loop playsinline class="hero-video" id="heroVideo" onloadstart="videoLoadStarted()">
             <source src="assets/videos/Final NS website video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -462,24 +462,33 @@
 
             // Simulate progress while loading
             const progressInterval = setInterval(() => {
-                if (progress < 90 && !loadingScreenHidden) {
-                    progress += Math.random() * 30;
-                    if (progress > 90) progress = 90;
+                if (progress < 95 && !loadingScreenHidden) {
+                    progress += Math.random() * 35;
+                    if (progress > 95) progress = 95;
                     updateProgress(progress);
                 }
-            }, 500);
+            }, 300);
 
-            // Listen for when video starts playing
+            // When video is fully loaded and ready to play
+            heroVideo.addEventListener('canplay', () => {
+                if (!loadingScreenHidden) {
+                    progress = 100;
+                    updateProgress(progress);
+                }
+            });
+
+            // When video actually starts playing - hide loading screen
             heroVideo.addEventListener('play', () => {
                 clearInterval(progressInterval);
                 hideLoadingScreen();
             });
 
-            // Fallback: Hide loading screen after 10 seconds regardless
+            // Backup timeout: Hide loading screen after 30 seconds if video hasn't played yet
             setTimeout(() => {
                 clearInterval(progressInterval);
+                updateProgress(100);
                 hideLoadingScreen();
-            }, 10000);
+            }, 30000);
         });
 
         // Mobile menu toggle functionality
