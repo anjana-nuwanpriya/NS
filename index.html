@@ -460,27 +460,32 @@
                 }
             }
 
-            // Simulate progress while loading
-            const progressInterval = setInterval(() => {
-                if (progress < 95 && !loadingScreenHidden) {
-                    progress += Math.random() * 35;
-                    if (progress > 95) progress = 95;
-                    updateProgress(progress);
+            // Track video loading progress
+            heroVideo.addEventListener('progress', () => {
+                if (heroVideo.buffered.length > 0) {
+                    const bufferedEnd = heroVideo.buffered.end(heroVideo.buffered.length - 1);
+                    const duration = heroVideo.duration;
+                    
+                    if (duration > 0) {
+                        progress = (bufferedEnd / duration) * 100;
+                        if (progress > 100) progress = 100;
+                        updateProgress(progress);
+                    }
                 }
-            }, 300);
+            });
 
             // When video is fully loaded and ready to play
             heroVideo.addEventListener('canplay', () => {
                 if (!loadingScreenHidden) {
                     progress = 100;
                     updateProgress(progress);
+                    clearInterval(progressInterval);
+                    
+                    // Auto-hide loading screen when fully loaded
+                    setTimeout(() => {
+                        hideLoadingScreen();
+                    }, 300);
                 }
-            });
-
-            // When video actually starts playing - hide loading screen
-            heroVideo.addEventListener('play', () => {
-                clearInterval(progressInterval);
-                hideLoadingScreen();
             });
         });
 
