@@ -482,11 +482,19 @@
                     clearInterval(progressInterval);
                     
                     // Auto-hide loading screen when fully loaded
-                    setTimeout(() => {
-                        hideLoadingScreen();
-                    }, 300);
+                    hideLoadingScreen();
                 }
             });
+
+            // Fallback: Auto-hide after 30 seconds if video doesn't trigger canplay
+            setTimeout(() => {
+                if (!loadingScreenHidden) {
+                    progress = 100;
+                    updateProgress(progress);
+                    clearInterval(progressInterval);
+                    hideLoadingScreen();
+                }
+            }, 30000);
         });
 
         // Mobile menu toggle functionality
