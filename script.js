@@ -115,3 +115,87 @@ document.querySelector('.hamburger').addEventListener('click', function() {
     this.classList.toggle('active');
     document.querySelector('.nav-menu').classList.toggle('active');
 });
+
+
+
+// Scroll Progress Indicator
+        window.addEventListener('scroll', function() {
+            const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+        }
+
+        // Search functionality
+        const searchIcon = document.querySelector('.search-icon');
+        if (searchIcon) {
+            searchIcon.addEventListener('click', function() {
+                alert('Search functionality would be implemented here');
+            });
+        }
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const allSections = document.querySelectorAll('.toggle-section');
+            
+            // Close all other sections (optional)
+            allSections.forEach(s => {
+                if (s.id !== sectionId) {
+                    s.classList.remove('active');
+                }
+            });
+            
+            // Toggle current section
+            section.classList.toggle('active');
+        }
+
+        // Make section headers focusable for accessibility
+        document.querySelectorAll('.toggle-section-header').forEach(header => {
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('role', 'button');
+            header.setAttribute('aria-expanded', 'false');
+            
+            header.addEventListener('click', function() {
+                const isActive = this.parentElement.classList.contains('active');
+                this.setAttribute('aria-expanded', isActive ? 'false' : 'true');
+            });
+        });
+
+        // Keyboard accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const activeElement = document.activeElement;
+                if (activeElement.classList.contains('toggle-section-header')) {
+                    e.preventDefault();
+                    activeElement.click();
+                }
+            }
+        });

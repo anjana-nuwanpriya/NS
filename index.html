@@ -7,6 +7,93 @@
     <title>NS Holdings Engineering Pvt Ltd</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* LOADING SCREEN STYLES */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-container {
+            text-align: center;
+        }
+
+        /* Animated Logo */
+        .loading-logo {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 60px;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        .loading-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Spinner Animation - Hidden */
+        .spinner {
+            display: none;
+        }
+
+        /* Loading Text - Hidden */
+        .loading-text {
+            display: none;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 250px;
+            height: 3px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #666666;
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Loading Percentage */
+        .loading-percentage {
+            color: #999999;
+            font-size: 14px;
+            margin-top: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
         /* Mobile Navigation */
         .hamburger {
             display: none;
@@ -38,43 +125,41 @@
 
         /* Mobile Menu Styles */
         @media (max-width: 768px) {
-     
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.95);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: left 0.3s ease;
+                z-index: 1001;
+            }
 
-        .nav-menu {
-        position: fixed;
-        top: 0;
-        left: -100%; /* hidden by default */
-        width: 100%;
-        height: 100vh;
-        background: rgba(0,0,0,0.95);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-        transition: left 0.3s ease;
-        z-index: 1001;
-    }
+            .nav-menu.active {
+                left: 0;
+            }
 
-    .nav-menu.active {
-        left: 0; /* slide into view */
-    }
+            .nav-menu a {
+                color: #fff;
+                font-size: 1.2rem;
+                text-decoration: none;
+            }
 
-    .nav-menu a {
-        color: #fff; /* make links visible */
-        font-size: 1.2rem;
-        text-decoration: none;
-    }
-
-    .hamburger {
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        z-index: 1002;
-        position: fixed;
-        top: 20px;
-        right: 20px;
-    }
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                z-index: 1002;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+            }
 
             .search-icon {
                 margin-top: 2rem;
@@ -83,51 +168,63 @@
     </style>
 </head>
 <body>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-container">
+            <!-- <div class="loading-logo">
+                <img src="assets/images/logo (1).png" alt="NS Holdings Logo">
+            </div> -->
+            <div class="spinner"></div>
+            <div class="loading-text">Loading NS Holdings</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loading-percentage" id="loadingPercentage">0%</div>
+        </div>
+    </div>
+
     <div class="scroll-indicator">
         <div class="scroll-progress" id="scroll-progress"></div>
     </div>
 
-<nav class="navbar">
-    <div class="nav-container">
-        <!-- Logo links to index.html -->
-        <div class="logo-section">
-            <a href="index.html">
-                <img src="assets/images/logo (1).png" alt="Logo" class="logo-image">
-            </a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo links to index.html -->
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="assets/images/logo (1).png" alt="Logo" class="logo-image">
+                </a>
+            </div>
+
+            <!-- Nav menu -->
+            <ul class="nav-menu">
+                <li><a href="expertise.html">EXPERTISE</a></li>
+                <li><a href="projects.html">PROJECTS</a></li>
+                <li><a href="careers.html">CAREERS</a></li>
+                <li><a href="contact.html">CONTACT US</a></li>
+                <li><a href="search.html" class="search-icon" style="color:white;">🔍</a></li>
+            </ul>
+
+            <!-- Hamburger menu -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
+    </nav>
 
-        <!-- Nav menu -->
-        <ul class="nav-menu">
-            <li><a href="expertise.html">EXPERTISE</a></li>
-            <li><a href="projects.html">PROJECTS</a></li>
-            <li><a href="careers.html">CAREERS</a></li>
-            <li><a href="contact.html">CONTACT US</a></li>
-            <li><a href="search.html" class="search-icon" style="color:white;">🔍</a></li>
-        </ul>
+    <section id="home" class="hero">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
+            <source src="assets/videos/Final NS website video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
-        <!-- Hamburger menu -->
-        <div class="hamburger">
-         
-                <span></span>
-                <span></span>
-                <span></span>
-           
+        <div class="hero-content">
+            <p>NS Holdings – Your trusted partner in delivering professional safety training, risk assessment programs, engineering consulting support, and high-quality industrial safety solutions across Sri Lanka, committed to creating safer, compliant, and efficient workplaces.</p>
         </div>
-    </div>
-</nav>
-
-<section id="home" class="hero">
-    <!-- Background Video -->
-    <video autoplay muted loop playsinline class="hero-video">
-        <source src="assets/videos/Final NS website video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-<div class="hero-content">
-    <!-- <h1>Over 10 Years of Service Excellence</h1> -->
-    <p>NS Holdings – Your trusted partner in delivering professional safety training, risk assessment programs, engineering consulting support, and high-quality industrial safety solutions across Sri Lanka, committed to creating safer, compliant, and efficient workplaces.</p>
-</div>
-</section>
+    </section>
 
     <section id="about" class="about">
         <div class="container">
@@ -136,192 +233,253 @@
                 <p>NS Holdings Engineering (Pvt) Ltd  is a multidisciplinary engineering, safety, and risk management consulting company committed to enhancing workplace safety, operational efficiency, and regulatory compliance across multiple industries.</p>
                 <br>
                 <p>With over 10 years of industry exposure, NS Holdings Engineering (Pvt) Ltd  delivers integrated safety training, engineering consulting support, and industrial safety solutions tailored to organizational needs. Our approach combines technical expertise, practical implementation, and innovative safety practices to help clients create safer and more sustainable working environments.</p>
-                
             </div>
         </div>
     </section>
 
-<section id="services" class="services">
-    <div class="container">
-        <div class="services-wrapper">
-            <button class="scroll-arrow left-arrow" id="scrollLeft" style="display: none;">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            
-            <div class="services-grid">
-                <!-- Service 1 -->
-                <div class="service-card glass-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-clipboard-check"></i>
+    <section id="services" class="services">
+        <div class="container">
+            <div class="services-wrapper">
+                <button class="scroll-arrow left-arrow" id="scrollLeft" style="display: none;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card glass-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>Risk Assessment Training Programs</h3>
+                        <p>Practical training to identify, evaluate, and control workplace hazards.</p>
                     </div>
-                    <h3>Risk Assessment Training Programs</h3>
-                    <p>Practical training to identify, evaluate, and control workplace hazards.</p>
-                </div>
 
-                <!-- Service 2 -->
-                <div class="service-card glass-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-hard-hat"></i>
+                    <!-- Service 2 -->
+                    <div class="service-card glass-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h3>Occupational Safety & Health Training Programs</h3>
+                        <p>Building safety awareness, compliance, and accident prevention skills.</p>
                     </div>
-                    <h3>Occupational Safety & Health Training Programs</h3>
-                    <p>Building safety awareness, compliance, and accident prevention skills.</p>
-                </div>
 
-                <!-- Service 3 -->
-                <div class="service-card glass-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
+                    <!-- Service 3 -->
+                    <div class="service-card glass-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Engineering Consulting Support & Innovations</h3>
+                        <p>Safety-focused engineering solutions and technical advisory services.</p>
                     </div>
-                    <h3>Engineering Consulting Support & Innovations</h3>
-                    <p>Safety-focused engineering solutions and technical advisory services.</p>
-                </div>
 
-                <!-- Service 4 -->
-                <div class="service-card glass-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
+                    <!-- Service 4 -->
+                    <div class="service-card glass-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>PPE Supply</h3>
+                        <p>Certified PPE to ensure reliable protection for every work environment.</p>
                     </div>
-                    <h3>PPE Supply</h3>
-                    <p>Certified PPE to ensure reliable protection for every work environment.</p>
-                </div>
 
-                <!-- Service 5 -->
-                <div class="service-card glass-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-sign"></i>
+                    <!-- Service 5 -->
+                    <div class="service-card glass-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-sign"></i>
+                        </div>
+                        <h3>SMETA Sign Board Supply</h3>
+                        <p>SMETA-compliant safety signage for clear hazard communication.</p>
                     </div>
-                    <h3>SMETA Sign Board Supply</h3>
-                    <p>SMETA-compliant safety signage for clear hazard communication.</p>
-                </div>
 
-                <!-- Service 6 -->
-                <div class="service-card glass-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-map-marked-alt"></i>
+                    <!-- Service 6 -->
+                    <div class="service-card glass-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3>Emergency Evacuation Map Designing</h3>
+                        <p>Clear evacuation maps for effective emergency response planning.</p>
                     </div>
-                    <h3>Emergency Evacuation Map Designing</h3>
-                    <p>Clear evacuation maps for effective emergency response planning.</p>
-                </div>
 
-                <!-- Service 7 -->
-                <div class="service-card glass-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
+                    <!-- Service 7 -->
+                    <div class="service-card glass-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Maintenance Items Supply</h3>
+                        <p>Essential maintenance supplies to support safe and continuous operations.</p>
                     </div>
-                    <h3>Maintenance Items Supply</h3>
-                    <p>Essential maintenance supplies to support safe and continuous operations.</p>
                 </div>
+                
+                <button class="scroll-arrow right-arrow" id="scrollRight">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
-            
-            <button class="scroll-arrow right-arrow" id="scrollRight">
-                <i class="fas fa-chevron-right"></i>
-            </button>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- UPDATED TOGGLE SECTIONS WITH SEPARATE STYLING -->
-<div class="toggle-sections-container">
-    <div class="toggle-section" id="connected">
-        <div class="toggle-section-header" onclick="toggleSection('connected')">
-            <h2 class="toggle-section-title">We Are Connected</h2>
-            <div class="toggle-icon"></div>
+    <div class="toggle-sections-container">
+        <div class="toggle-section" id="connected">
+            <div class="toggle-section-header" onclick="toggleSection('connected')">
+                <h2 class="toggle-section-title">We Are Connected</h2>
+                <div class="toggle-icon"></div>
+            </div>
+            <div class="toggle-section-content">
+                <div class="toggle-content-inner">
+                    <div class="toggle-credential-item">Working closely with industry partners, safety professionals, and engineering specialists to deliver effective Risk Assessment and Occupational Safety & Health (OSH) Training Programs.</div>
+                    <div class="toggle-credential-item">Collaborating with engineering consultants, safety solution providers, and suppliers to support innovative and practical workplace safety solutions.</div>
+                    <div class="toggle-credential-item">Maintaining strong relationships with PPE manufacturers, safety signage providers, and emergency planning specialists to ensure reliable and compliant safety supplies.</div>
+                    <div class="toggle-credential-item">Actively engaging with organizations, institutions, and industry stakeholders to promote best practices in occupational safety, risk management, and engineering support services.</div>
+                </div>
+            </div>
         </div>
-        <div class="toggle-section-content">
-            <div class="toggle-content-inner">
-                <div class="toggle-credential-item">Working closely with industry partners, safety professionals, and engineering specialists to deliver effective Risk Assessment and Occupational Safety & Health (OSH) Training Programs.</div>
-                <div class="toggle-credential-item">Collaborating with engineering consultants, safety solution providers, and suppliers to support innovative and practical workplace safety solutions.</div>
-                <div class="toggle-credential-item">Maintaining strong relationships with PPE manufacturers, safety signage providers, and emergency planning specialists to ensure reliable and compliant safety supplies.</div>
-                <div class="toggle-credential-item">Actively engaging with organizations, institutions, and industry stakeholders to promote best practices in occupational safety, risk management, and engineering support services.</div>
+
+        <div class="toggle-section" id="experienced">
+            <div class="toggle-section-header" onclick="toggleSection('experienced')">
+                <h2 class="toggle-section-title">We Are Experienced</h2>
+                <div class="toggle-icon"></div>
+            </div>
+            <div class="toggle-section-content">
+                <div class="toggle-content-inner">
+                    <div class="toggle-credential-item">Extensive experience in delivering Risk Assessment and Occupational Safety & Health (OSH) Training Programs across diverse industries.</div>
+                    <div class="toggle-credential-item">Proven capability in providing engineering consulting support and innovative safety solutions tailored to complex operational environments.</div>
+                    <div class="toggle-credential-item">Successfully supporting organizations with PPE supply, SMETA-compliant safety sign boards, emergency evacuation map design, and maintenance items supply.</div>
+                    <div class="toggle-credential-item">Strong track record in planning, coordination, and delivery of safety-focused consulting and training initiatives, ensuring practical implementation and measurable results.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toggle-section" id="professional">
+            <div class="toggle-section-header" onclick="toggleSection('professional')">
+                <h2 class="toggle-section-title">We Are Professionals</h2>
+                <div class="toggle-icon"></div>
+            </div>
+            <div class="toggle-section-content">
+                <div class="toggle-content-inner">
+                    <div class="toggle-credential-item">A trusted provider of Risk Assessment and Occupational Safety & Health (OSH) Training Programs, supporting organizations in building safer and compliant workplaces.</div>
+                    <div class="toggle-credential-item">Delivering engineering consulting support and innovative safety solutions, tailored to industry-specific operational and regulatory requirements.</div>
+                    <div class="toggle-credential-item">Supplying certified Personal Protective Equipment (PPE), SMETA-compliant safety sign boards, emergency evacuation maps, and essential maintenance items to enhance workplace safety and preparedness.</div>
+                    <div class="toggle-credential-item">Committed to professional standards, continuous improvement, and best practices in engineering, safety management, and risk control across diverse industries.</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="toggle-section" id="experienced">
-        <div class="toggle-section-header" onclick="toggleSection('experienced')">
-            <h2 class="toggle-section-title">We Are Experienced</h2>
-            <div class="toggle-icon"></div>
-        </div>
-        <div class="toggle-section-content">
-            <div class="toggle-content-inner">
-                <div class="toggle-credential-item">Extensive experience in delivering Risk Assessment and Occupational Safety & Health (OSH) Training Programs across diverse industries.</div>
-                <div class="toggle-credential-item">Proven capability in providing engineering consulting support and innovative safety solutions tailored to complex operational environments.</div>
-                <div class="toggle-credential-item">Successfully supporting organizations with PPE supply, SMETA-compliant safety sign boards, emergency evacuation map design, and maintenance items supply.</div>
-                <div class="toggle-credential-item">Strong track record in planning, coordination, and delivery of safety-focused consulting and training initiatives, ensuring practical implementation and measurable results.</div>
-            </div>
-        </div>
+    <div class="section expertise">
+        <span>Expertise</span>
     </div>
 
-    <div class="toggle-section" id="professional">
-        <div class="toggle-section-header" onclick="toggleSection('professional')">
-            <h2 class="toggle-section-title">We Are Professionals</h2>
-            <div class="toggle-icon"></div>
-        </div>
-        <div class="toggle-section-content">
-            <div class="toggle-content-inner">
-                <div class="toggle-credential-item">A trusted provider of Risk Assessment and Occupational Safety & Health (OSH) Training Programs, supporting organizations in building safer and compliant workplaces.</div>
-                <div class="toggle-credential-item">Delivering engineering consulting support and innovative safety solutions, tailored to industry-specific operational and regulatory requirements.</div>
-                <div class="toggle-credential-item">Supplying certified Personal Protective Equipment (PPE), SMETA-compliant safety sign boards, emergency evacuation maps, and essential maintenance items to enhance workplace safety and preparedness.</div>
-                <div class="toggle-credential-item">Committed to professional standards, continuous improvement, and best practices in engineering, safety management, and risk control across diverse industries.</div>
-            </div>
-        </div>
+    <div class="section projects">
+        <span>Projects</span>
     </div>
-</div>
 
-  <div class="section expertise">
-    <span>Expertise</span>
-  </div>
-
-  <div class="section projects">
-    <span>Projects</span>
-  </div>
-
-<footer class="footer">
-    <div class="container">
-        
-        <!-- Company Logo -->
-        <div class="footer-logo">
-            <img src="assets/images/black.png" alt="Company Logo">
-        </div>
-
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>General</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Expertise</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
+    <footer class="footer">
+        <div class="container">
+            <!-- Company Logo -->
+            <div class="footer-logo">
+                <img src="assets/images/black.png" alt="Company Logo">
             </div>
-            <div class="footer-section">
-                <h3>Expertise</h3>
-                <ul>
-                    <li><a href="#">Educational Infrastructure</a></li>
-                    <li><a href="#">Healthcare Facilities</a></li>
-                    <li><a href="#">Corporate Office Complexes</a></li>
-                    <li><a href="#">Production Facility Infrastructure</a></li>
-                    <li><a href="#">Landscape & Urbanism</a></li>
-                </ul>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>General</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Expertise</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Expertise</h3>
+                    <ul>
+                        <li><a href="#">Educational Infrastructure</a></li>
+                        <li><a href="#">Healthcare Facilities</a></li>
+                        <li><a href="#">Corporate Office Complexes</a></li>
+                        <li><a href="#">Production Facility Infrastructure</a></li>
+                        <li><a href="#">Landscape & Urbanism</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Social</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-section">
-                <h3>Social</h3>
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                </ul>
+            
+            <div class="footer-bottom">
+                <p>Copyright © 2025 NS Holdings Engineering Private Limited . Designed by @ZIP SOLUTIONS</p>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>Copyright © 2025 NS Holdings Engineering Private Limited . Designed by @ZIP SOLUTIONS</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <script src="script.js"></script>
     <script>
+        // LOADING SCREEN FUNCTIONALITY - SHOW ONLY ON FIRST PAGE LOAD
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const progressBar = document.getElementById('progressBar');
+            const loadingPercentage = document.getElementById('loadingPercentage');
+            const heroVideo = document.getElementById('heroVideo');
+
+            // Check if this is the first time loading (not a repeat navigation)
+            const hasLoaded = sessionStorage.getItem('nsHoldingsLoaded');
+            
+            // If already loaded once in this session, hide loading screen immediately
+            if (hasLoaded) {
+                loadingScreen.classList.add('hidden');
+                return;
+            }
+
+            // Mark that we've loaded once
+            sessionStorage.setItem('nsHoldingsLoaded', 'true');
+
+            // Simulate progress while loading
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                if (progress < 90) {
+                    progress += Math.random() * 30;
+                    if (progress > 90) progress = 90;
+                    updateProgress(progress);
+                }
+            }, 500);
+
+            // Function to update progress bar
+            function updateProgress(percent) {
+                progressBar.style.width = percent + '%';
+                loadingPercentage.textContent = Math.round(percent) + '%';
+            }
+
+            // When video is loaded
+            heroVideo.addEventListener('loadeddata', () => {
+                progress = 95;
+                updateProgress(progress);
+            });
+
+            // When video is fully ready to play
+            heroVideo.addEventListener('canplay', () => {
+                progress = 100;
+                updateProgress(progress);
+                
+                // Hide loading screen after a short delay
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 300);
+                
+                clearInterval(progressInterval);
+            });
+
+            // Fallback: Hide loading screen after 8 seconds regardless
+            setTimeout(() => {
+                if (!loadingScreen.classList.contains('hidden')) {
+                    loadingScreen.classList.add('hidden');
+                    clearInterval(progressInterval);
+                }
+            }, 8000);
+        });
+
         // Mobile menu toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
@@ -357,19 +515,16 @@
             const rightArrow = document.getElementById('scrollRight');
 
             if (servicesGrid && leftArrow && rightArrow) {
-                // Function to update arrow visibility
                 function updateArrows() {
                     const scrollLeft = servicesGrid.scrollLeft;
                     const maxScroll = servicesGrid.scrollWidth - servicesGrid.clientWidth;
                     
-                    // Show/hide left arrow
                     if (scrollLeft > 0) {
                         leftArrow.style.display = 'flex';
                     } else {
                         leftArrow.style.display = 'none';
                     }
                     
-                    // Show/hide right arrow
                     if (scrollLeft >= maxScroll - 5) {
                         rightArrow.style.display = 'none';
                     } else {
@@ -377,7 +532,6 @@
                     }
                 }
                 
-                // Scroll right
                 rightArrow.addEventListener('click', () => {
                     const cardWidth = servicesGrid.querySelector('.service-card').offsetWidth;
                     servicesGrid.scrollBy({
@@ -386,7 +540,6 @@
                     });
                 });
                 
-                // Scroll left
                 leftArrow.addEventListener('click', () => {
                     const cardWidth = servicesGrid.querySelector('.service-card').offsetWidth;
                     servicesGrid.scrollBy({
@@ -395,13 +548,8 @@
                     });
                 });
                 
-                // Update arrows on scroll
                 servicesGrid.addEventListener('scroll', updateArrows);
-                
-                // Initial arrow state
                 updateArrows();
-                
-                // Update on window resize
                 window.addEventListener('resize', updateArrows);
             }
         });
