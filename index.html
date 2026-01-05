@@ -436,48 +436,50 @@
             // Mark that we've loaded once
             sessionStorage.setItem('nsHoldingsLoaded', 'true');
 
-            // Simulate progress while loading
+            let loadingScreenHidden = false;
             let progress = 0;
+
+            // Function to hide loading screen
+            function hideLoadingScreen() {
+                if (!loadingScreenHidden) {
+                    loadingScreenHidden = true;
+                    progressBar.style.width = '100%';
+                    loadingPercentage.textContent = '100%';
+                    
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                    }, 300);
+                }
+            }
+
+            // Function to update progress bar
+            function updateProgress(percent) {
+                if (percent <= 100) {
+                    progressBar.style.width = percent + '%';
+                    loadingPercentage.textContent = Math.round(percent) + '%';
+                }
+            }
+
+            // Simulate progress while loading
             const progressInterval = setInterval(() => {
-                if (progress < 90) {
+                if (progress < 90 && !loadingScreenHidden) {
                     progress += Math.random() * 30;
                     if (progress > 90) progress = 90;
                     updateProgress(progress);
                 }
             }, 500);
 
-            // Function to update progress bar
-            function updateProgress(percent) {
-                progressBar.style.width = percent + '%';
-                loadingPercentage.textContent = Math.round(percent) + '%';
-            }
-
-            // When video is loaded
-            heroVideo.addEventListener('loadeddata', () => {
-                progress = 95;
-                updateProgress(progress);
-            });
-
-            // When video is fully ready to play
-            heroVideo.addEventListener('canplay', () => {
-                progress = 100;
-                updateProgress(progress);
-                
-                // Hide loading screen after a short delay
-                setTimeout(() => {
-                    loadingScreen.classList.add('hidden');
-                }, 300);
-                
+            // Listen for when video starts playing
+            heroVideo.addEventListener('play', () => {
                 clearInterval(progressInterval);
+                hideLoadingScreen();
             });
 
-            // Fallback: Hide loading screen after 8 seconds regardless
+            // Fallback: Hide loading screen after 10 seconds regardless
             setTimeout(() => {
-                if (!loadingScreen.classList.contains('hidden')) {
-                    loadingScreen.classList.add('hidden');
-                    clearInterval(progressInterval);
-                }
-            }, 8000);
+                clearInterval(progressInterval);
+                hideLoadingScreen();
+            }, 10000);
         });
 
         // Mobile menu toggle functionality
