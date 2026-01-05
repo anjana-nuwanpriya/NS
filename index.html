@@ -462,19 +462,23 @@
 
             // Simulate progress while waiting for video to load
             let simulatedProgress = 0;
+            let simulationStarted = false;
             const simulationInterval = setInterval(() => {
-                if (!progressTracked && simulatedProgress < 90) {
-                    simulatedProgress += Math.random() * 15;
-                    if (simulatedProgress > 90) simulatedProgress = 90;
+                if (!progressTracked && !simulationStarted) {
+                    simulationStarted = true;
+                }
+                if (!progressTracked && simulatedProgress < 85) {
+                    simulatedProgress += Math.random() * 12;
+                    if (simulatedProgress > 85) simulatedProgress = 85;
                     updateProgress(simulatedProgress);
                 }
-            }, 800);
+            }, 600);
 
             // Track video loading progress - only on first load
             let progressTracked = false;
             
             heroVideo.addEventListener('progress', () => {
-                // Only track progress once until it reaches 100%
+                // Only track progress once until it reaches target
                 if (progressTracked) return;
                 
                 if (heroVideo.buffered.length > 0) {
@@ -483,16 +487,17 @@
                     
                     if (duration > 0) {
                         progress = (bufferedEnd / duration) * 100;
+                        // Use whichever is higher: simulated or real
                         if (progress > simulatedProgress) {
                             simulatedProgress = progress;
+                            updateProgress(progress);
                         }
-                        if (progress > 100) progress = 100;
-                        updateProgress(progress);
                         
-                        // Close loading screen as soon as it reaches 95%
-                        if (progress >= 95 && !loadingScreenHidden) {
+                        // Close loading screen as soon as it reaches 85% or real progress is high
+                        if (progress >= 85 && !loadingScreenHidden) {
                             progressTracked = true;
                             clearInterval(simulationInterval);
+                            updateProgress(100);
                             hideLoadingScreen();
                         }
                     }
