@@ -460,6 +460,16 @@
                 }
             }
 
+            // Simulate progress while waiting for video to load
+            let simulatedProgress = 0;
+            const simulationInterval = setInterval(() => {
+                if (!progressTracked && simulatedProgress < 90) {
+                    simulatedProgress += Math.random() * 15;
+                    if (simulatedProgress > 90) simulatedProgress = 90;
+                    updateProgress(simulatedProgress);
+                }
+            }, 800);
+
             // Track video loading progress - only on first load
             let progressTracked = false;
             
@@ -473,12 +483,16 @@
                     
                     if (duration > 0) {
                         progress = (bufferedEnd / duration) * 100;
+                        if (progress > simulatedProgress) {
+                            simulatedProgress = progress;
+                        }
                         if (progress > 100) progress = 100;
                         updateProgress(progress);
                         
-                        // Close loading screen as soon as it reaches 100%
+                        // Close loading screen as soon as it reaches 95%
                         if (progress >= 95 && !loadingScreenHidden) {
                             progressTracked = true;
+                            clearInterval(simulationInterval);
                             hideLoadingScreen();
                         }
                     }
