@@ -613,10 +613,46 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <!-- Company Logo -->
             <div class="footer-logo">
                 <img src="assets/images/black.png" alt="Company Logo">
+            </div>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>General</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Expertise</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Expertise</h3>
+                    <ul>
+                        <li><a href="#">Educational Infrastructure</a></li>
+                        <li><a href="#">Healthcare Facilities</a></li>
+                        <li><a href="#">Corporate Office Complexes</a></li>
+                        <li><a href="#">Production Facility Infrastructure</a></li>
+                        <li><a href="#">Landscape & Urbanism</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Social</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Copyright © 2025 NS Holdings Engineering Private Limited . Designed by @ZIP SOLUTIONS</p>
             </div>
         </div>
     </footer>
@@ -672,9 +708,16 @@
                     
                     const productName = this.getAttribute('data-product');
                     const whatsappNumber = '719716007';
-                    const shopUrl = window.location.href;
                     
-                    const message = `Hi, I'm interested in: ${productName}\n\n${shopUrl}`;
+                    // Get the product card and image
+                    const productCard = this.closest('.product-card');
+                    const productImage = productCard.querySelector('.product-image-img').src;
+                    const fullImageUrl = new URL(productImage, window.location.origin).href;
+                    
+                    const message = `Product Image: ${fullImageUrl}
+
+Hi, I'm interested in: ${productName}. Can you provide more details and pricing?`;
+                    
                     const encodedMessage = encodeURIComponent(message);
                     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
                     
