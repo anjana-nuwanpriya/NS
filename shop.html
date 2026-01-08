@@ -965,17 +965,20 @@
                     e.preventDefault();
                     
                     const productName = this.getAttribute('data-product');
+                    const productImage = this.getAttribute('data-image');
                     
                     // Replace with your actual WhatsApp Business number
                     const whatsappNumber = '719716007'; // CHANGE THIS TO YOUR WHATSAPP NUMBER
                     
-                    // Get current shop page URL
-                    const shopUrl = window.location.href;
+                    // Get full image URL
+                    const fullImageUrl = new URL(productImage, window.location.origin).href;
                     
-                    // Create simple message with product name and shop link only
+                    // Create simple message with product name, image link, and inquiry
                     const message = `Hi, I'm interested in: ${productName}
 
-${shopUrl}`;
+Product Image: ${fullImageUrl}
+
+Can you provide more details and pricing?`;
                     
                     // Encode the message for URL
                     const encodedMessage = encodeURIComponent(message);
