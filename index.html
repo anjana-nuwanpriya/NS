@@ -165,6 +165,276 @@
                 margin-top: 2rem;
             }
         }
+
+/* ========== PRODUCT CATEGORY SLIDER ========== */
+.product-slider-section {
+    height: 70vh;
+    min-height: 550px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-slider {
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 80px;
+}
+
+.product-slider__btn {
+    --size: 50px;
+    width: var(--size);
+    height: var(--size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+}
+
+.product-slider__btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.product-slider__btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: #333;
+}
+
+.product-slider__btn--prev {
+    left: 20px;
+}
+
+.product-slider__btn--next {
+    right: 20px;
+}
+
+.product-slides__wrapper {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.product-slides__wrapper > * {
+    grid-area: 1 / -1;
+}
+
+.product-slides {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+}
+
+.product-slides > * {
+    grid-area: 1 / -1;
+}
+
+.product-slide {
+    --slide-tx: 0px;
+    --slide-scale: 0.7;
+    --slide-opacity: 0;
+    width: min(280px, 35vw);
+    aspect-ratio: 3 / 4;
+    user-select: none;
+    perspective: 800px;
+    transform: translateX(var(--slide-tx)) scale(var(--slide-scale));
+    opacity: var(--slide-opacity);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    pointer-events: none;
+    position: relative;
+}
+
+.product-slide[data-current] {
+    --slide-tx: 0px;
+    --slide-scale: 1;
+    --slide-opacity: 1;
+    pointer-events: auto;
+    z-index: 20;
+}
+
+.product-slide[data-previous] {
+    --slide-tx: calc(-1 * min(200px, 28vw));
+    --slide-scale: 0.85;
+    --slide-opacity: 0.7;
+    z-index: 15;
+}
+
+.product-slide[data-next] {
+    --slide-tx: calc(1 * min(200px, 28vw));
+    --slide-scale: 0.85;
+    --slide-opacity: 0.7;
+    z-index: 15;
+}
+
+/* Additional slides for 5-slide view */
+.product-slide[data-previous-2] {
+    --slide-tx: calc(-2 * min(200px, 28vw));
+    --slide-scale: 0.7;
+    --slide-opacity: 0.5;
+    z-index: 10;
+}
+
+.product-slide[data-next-2] {
+    --slide-tx: calc(2 * min(200px, 28vw));
+    --slide-scale: 0.7;
+    --slide-opacity: 0.5;
+    z-index: 10;
+}
+
+.product-slide__inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    display: block;
+    text-decoration: none;
+}
+
+.product-slide[data-current] .product-slide__inner:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+}
+
+.product-slide__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-slide[data-current] .product-slide__inner:hover .product-slide__image {
+    transform: scale(1.05);
+}
+
+.product-slide__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.product-slide__title {
+    color: #fff;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 0;
+}
+
+/* Section Title */
+.product-slider-section .section-header {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 50;
+}
+
+.product-slider-section .section-header h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+/* Mobile Responsive for Slider */
+@media (max-width: 1024px) {
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-slider-section {
+        height: 45vh;
+        min-height: 350px;
+    }
+
+    .product-slider__btn {
+        --size: 40px;
+    }
+
+    .product-slider__btn--prev {
+        left: 10px;
+    }
+
+    .product-slider__btn--next {
+        right: 10px;
+    }
+
+    .product-slide {
+        width: min(220px, 50vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(180px, 40vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.5;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(180px, 40vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.5;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-slider-section {
+        height: 40vh;
+        min-height: 300px;
+    }
+
+    .product-slide[data-previous],
+    .product-slide[data-next] {
+        --slide-opacity: 0.3;
+    }
+
+    .product-slide__title {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+}
+/* ========== END PRODUCT CATEGORY SLIDER ========== */
     </style>
 </head>
 <body>
@@ -238,84 +508,113 @@
         </div>
     </section>
 
-    <section id="services" class="services">
-        <div class="container">
-            <div class="services-wrapper">
-                <button class="scroll-arrow left-arrow" id="scrollLeft" style="display: none;">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="services-grid">
-                    <!-- Service 1 -->
-                    <div class="service-card glass-card fade-in">
-                        <div class="service-icon">
-                            <i class="fas fa-clipboard-check"></i>
-                        </div>
-                        <h3>Risk Assessment Training Programs</h3>
-                        <p>Practical training to identify, evaluate, and control workplace hazards.</p>
+    <!-- ========== PRODUCT CATEGORY SLIDER ========== -->
+    <section class="product-slider-section">
+        <div class="section-header">
+            <h2>Our Products</h2>
+        </div>
+        
+        <div class="product-slider">
+            <button class="product-slider__btn product-slider__btn--prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </button>
+
+            <div class="product-slides__wrapper">
+                <div class="product-slides">
+                    <!-- Slide 1 - Safety Shoe -->
+                    <div class="product-slide" data-index="0">
+                        <a href="shop.html?category=safety-shoe" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/safety-shoe-h01.jpg" alt="Safety Shoe" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Safety Shoe</h3>
+                            </div>
+                        </a>
                     </div>
 
-                    <!-- Service 2 -->
-                    <div class="service-card glass-card fade-in">
-                        <div class="service-icon">
-                            <i class="fas fa-hard-hat"></i>
-                        </div>
-                        <h3>Occupational Safety & Health Training Programs</h3>
-                        <p>Building safety awareness, compliance, and accident prevention skills.</p>
+                    <!-- Slide 2 - Safety Boot -->
+                    <div class="product-slide" data-index="1">
+                        <a href="shop.html?category=safety-boot" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/safety-boot-yellow-steel.jpg" alt="Safety Boot" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Safety Boot</h3>
+                            </div>
+                        </a>
                     </div>
 
-                    <!-- Service 3 -->
-                    <div class="service-card glass-card fade-in">
-                        <div class="service-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3>Engineering Consulting Support & Innovations</h3>
-                        <p>Safety-focused engineering solutions and technical advisory services.</p>
+                    <!-- Slide 3 - Lab Shoe -->
+                    <div class="product-slide" data-index="2">
+                        <a href="shop.html?category=lab-shoe" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/lab-shoe1.jpg" alt="Lab Shoe" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Lab Shoe</h3>
+                            </div>
+                        </a>
                     </div>
 
-                    <!-- Service 4 -->
-                    <div class="service-card glass-card fade-in">
-                        <div class="service-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>PPE Supply</h3>
-                        <p>Certified PPE to ensure reliable protection for every work environment.</p>
+                    <!-- Slide 4 - Shoe Dispenser -->
+                    <div class="product-slide" data-index="3">
+                        <a href="shop.html?category=shoe-dispenser" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/shoe-cover-dispenser.jpg" alt="Shoe Dispenser" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Shoe Dispenser</h3>
+                            </div>
+                        </a>
                     </div>
 
-                    <!-- Service 5 -->
-                    <div class="service-card glass-card fade-in">
-                        <div class="service-icon">
-                            <i class="fas fa-sign"></i>
-                        </div>
-                        <h3>SMETA Sign Board Supply</h3>
-                        <p>SMETA-compliant safety signage for clear hazard communication.</p>
+                    <!-- Slide 5 - Safety Helmet -->
+                    <div class="product-slide" data-index="4">
+                        <a href="shop.html?category=safety-helmet" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/safety-helmet.png" alt="Safety Helmet" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Safety Helmet</h3>
+                            </div>
+                        </a>
                     </div>
 
-                    <!-- Service 6 -->
-                    <div class="service-card glass-card fade-in">
-                        <div class="service-icon">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
-                        <h3>Emergency Evacuation Map Designing</h3>
-                        <p>Clear evacuation maps for effective emergency response planning.</p>
+                    <!-- Slide 6 - Spill Kit -->
+                    <div class="product-slide" data-index="5">
+                        <a href="shop.html?category=spill-kit" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/spill-kit.jpeg" alt="Spill Kit" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Spill Kit</h3>
+                            </div>
+                        </a>
                     </div>
 
-                    <!-- Service 7 -->
-                    <div class="service-card glass-card fade-in">
-                        <div class="service-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3>Maintenance Items Supply</h3>
-                        <p>Essential maintenance supplies to support safe and continuous operations.</p>
+                    <!-- Slide 7 - Uniform -->
+                    <div class="product-slide" data-index="6">
+                        <a href="shop.html?category=uniform" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/Screenshot 2026-01-08 at 21.04.26.png" alt="Uniform" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Uniform</h3>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Slide 8 - Sign Boards -->
+                    <div class="product-slide" data-index="7">
+                        <a href="shop.html?category=sign-boards" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/WhatsApp Image 2026-01-08 at 21.01.35.jpeg" alt="Sign Boards" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Sign Boards</h3>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                
-                <button class="scroll-arrow right-arrow" id="scrollRight">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
+
+            <button class="product-slider__btn product-slider__btn--next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </button>
         </div>
     </section>
+    <!-- ========== END PRODUCT CATEGORY SLIDER ========== -->
+
+
 
     <!-- UPDATED TOGGLE SECTIONS WITH SEPARATE STYLING -->
     <div class="toggle-sections-container">
@@ -515,7 +814,7 @@
                 }
             });
 
-// Fallback: Auto-hide after 30 seconds if video doesn't trigger canplay
+            // Fallback: Auto-hide after 30 seconds if video doesn't trigger canplay
             setTimeout(() => {
                 if (!loadingScreenHidden) {
                     progress = 100;
@@ -599,6 +898,66 @@
                 window.addEventListener('resize', updateArrows);
             }
         });
+
+       // ========== PRODUCT CATEGORY SLIDER ==========
+(function() {
+    const TOTAL_SLIDES = 8;
+    let currentIndex = 0;
+
+    const wrap = (n, max) => ((n % max) + max) % max;
+
+    function getSlideByIndex(index) {
+        return document.querySelector(`.product-slide[data-index="${index}"]`);
+    }
+
+    function updateSlider() {
+        const prevIndex = wrap(currentIndex - 1, TOTAL_SLIDES);
+        const nextIndex = wrap(currentIndex + 1, TOTAL_SLIDES);
+        const prev2Index = wrap(currentIndex - 2, TOTAL_SLIDES);
+        const next2Index = wrap(currentIndex + 2, TOTAL_SLIDES);
+
+        // Clear all states
+        document.querySelectorAll('.product-slide').forEach(el => {
+            el.removeAttribute('data-current');
+            el.removeAttribute('data-previous');
+            el.removeAttribute('data-next');
+            el.removeAttribute('data-previous-2');
+            el.removeAttribute('data-next-2');
+        });
+
+        // Set states for 5 slides
+        const currentSlide = getSlideByIndex(currentIndex);
+        const prevSlide = getSlideByIndex(prevIndex);
+        const nextSlide = getSlideByIndex(nextIndex);
+        const prev2Slide = getSlideByIndex(prev2Index);
+        const next2Slide = getSlideByIndex(next2Index);
+
+        if (currentSlide) currentSlide.setAttribute('data-current', '');
+        if (prevSlide) prevSlide.setAttribute('data-previous', '');
+        if (nextSlide) nextSlide.setAttribute('data-next', '');
+        if (prev2Slide) prev2Slide.setAttribute('data-previous-2', '');
+        if (next2Slide) next2Slide.setAttribute('data-next-2', '');
+    }
+
+    function changeSlide(direction) {
+        currentIndex = wrap(currentIndex + direction, TOTAL_SLIDES);
+        updateSlider();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        const prevBtn = document.querySelector('.product-slider__btn--prev');
+        const nextBtn = document.querySelector('.product-slider__btn--next');
+
+        if (prevBtn && nextBtn) {
+            updateSlider();
+
+            prevBtn.addEventListener('click', () => changeSlide(-1));
+            nextBtn.addEventListener('click', () => changeSlide(1));
+        }
+    });
+})();
+// ========== END PRODUCT CATEGORY SLIDER ==========
     </script>
 </body>
 </html>
