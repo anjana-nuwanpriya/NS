@@ -166,7 +166,53 @@
             }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ========== PRODUCT CATEGORY SLIDER ========== */
+
 .product-slider-section {
     height: 70vh;
     min-height: 550px;
@@ -187,6 +233,7 @@
     justify-content: center;
     position: relative;
     padding: 0 80px;
+    background: #ffffff !important;
 }
 
 .product-slider__btn {
@@ -205,10 +252,15 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 100;
+    touch-action: manipulation;
 }
 
 .product-slider__btn:hover {
     background: rgba(0, 0, 0, 0.1);
+}
+
+.product-slider__btn:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .product-slider__btn svg {
@@ -231,6 +283,7 @@
     display: grid;
     place-items: center;
     position: relative;
+    background: #ffffff !important;
 }
 
 .product-slides__wrapper > * {
@@ -243,6 +296,7 @@
     display: grid;
     place-items: center;
     pointer-events: none;
+    background: #ffffff !important;
 }
 
 .product-slides > * {
@@ -262,6 +316,8 @@
     transition: transform 0.6s ease, opacity 0.6s ease;
     pointer-events: none;
     position: relative;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
 }
 
 .product-slide[data-current] {
@@ -370,18 +426,301 @@
     margin: 0;
 }
 
-/* Mobile Responsive for Slider */
+/* ============================================
+   EXTRA LARGE SCREENS (1920px+)
+   ============================================ */
+
+@media (min-width: 1920px) {
+    .product-slider-section {
+        height: 75vh;
+        min-height: 600px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 100px;
+    }
+
+    .product-slide {
+        width: min(350px, 30vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(250px, 25vw));
+        --slide-scale: 0.88;
+        --slide-opacity: 0.75;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(250px, 25vw));
+        --slide-scale: 0.88;
+        --slide-opacity: 0.75;
+    }
+
+    .product-slide[data-previous-2] {
+        --slide-tx: calc(-2 * min(250px, 25vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.6;
+    }
+
+    .product-slide[data-next-2] {
+        --slide-tx: calc(2 * min(250px, 25vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.6;
+    }
+
+    .product-slider__btn {
+        --size: 60px;
+    }
+}
+
+/* ============================================
+   LARGE SCREENS (1366px - 1919px)
+   ============================================ */
+
+@media (min-width: 1366px) and (max-width: 1919px) {
+    .product-slider-section {
+        height: 72vh;
+        min-height: 550px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 80px;
+    }
+
+    .product-slide {
+        width: min(320px, 32vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(230px, 26vw));
+        --slide-scale: 0.85;
+        --slide-opacity: 0.72;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(230px, 26vw));
+        --slide-scale: 0.85;
+        --slide-opacity: 0.72;
+    }
+
+    .product-slide[data-previous-2] {
+        --slide-tx: calc(-2 * min(230px, 26vw));
+        --slide-scale: 0.72;
+        --slide-opacity: 0.55;
+    }
+
+    .product-slide[data-next-2] {
+        --slide-tx: calc(2 * min(230px, 26vw));
+        --slide-scale: 0.72;
+        --slide-opacity: 0.55;
+    }
+
+    .product-slider__btn {
+        --size: 55px;
+    }
+}
+
+/* ============================================
+   DESKTOP (1025px - 1365px)
+   ============================================ */
+
+@media (min-width: 1025px) and (max-width: 1365px) {
+    .product-slider-section {
+        height: 70vh;
+        min-height: 500px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 60px;
+    }
+
+    .product-slide {
+        width: min(280px, 32vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(200px, 26vw));
+        --slide-scale: 0.83;
+        --slide-opacity: 0.68;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(200px, 26vw));
+        --slide-scale: 0.83;
+        --slide-opacity: 0.68;
+    }
+
+    .product-slide[data-previous-2] {
+        --slide-tx: calc(-2 * min(200px, 26vw));
+        --slide-scale: 0.68;
+        --slide-opacity: 0.5;
+    }
+
+    .product-slide[data-next-2] {
+        --slide-tx: calc(2 * min(200px, 26vw));
+        --slide-scale: 0.68;
+        --slide-opacity: 0.5;
+    }
+
+    .product-slider__btn {
+        --size: 50px;
+    }
+
+    .product-slider__btn--prev {
+        left: 20px;
+    }
+
+    .product-slider__btn--next {
+        right: 20px;
+    }
+}
+
+/* ============================================
+   TABLET LANDSCAPE (1024px)
+   ============================================ */
+
 @media (max-width: 1024px) {
+    .product-slider-section {
+        height: 65vh;
+        min-height: 450px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 50px;
+    }
+
+    .product-slide {
+        width: min(260px, 38vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(180px, 32vw));
+        --slide-scale: 0.80;
+        --slide-opacity: 0.65;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(180px, 32vw));
+        --slide-scale: 0.80;
+        --slide-opacity: 0.65;
+        z-index: 15;
+    }
+
     .product-slide[data-previous-2],
     .product-slide[data-next-2] {
         --slide-opacity: 0;
     }
+
+    .product-slider__btn {
+        --size: 45px;
+    }
+
+    .product-slider__btn--prev {
+        left: 15px;
+    }
+
+    .product-slider__btn--next {
+        right: 15px;
+    }
 }
 
-@media (max-width: 768px) {
+/* ============================================
+   TABLET PORTRAIT (769px - 1023px)
+   ============================================ */
+
+@media (min-width: 769px) and (max-width: 1023px) {
     .product-slider-section {
-        height: 45vh;
+        height: 60vh;
+        min-height: 400px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 40px;
+    }
+
+    .product-slide {
+        width: min(240px, 42vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(160px, 35vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.58;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(160px, 35vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.58;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 40px;
+    }
+
+    .product-slider__btn--prev {
+        left: 12px;
+    }
+
+    .product-slider__btn--next {
+        right: 12px;
+    }
+
+    .product-slide__title {
+        font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================
+   SMALL TABLET (481px - 768px)
+   ============================================ */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .product-slider-section {
+        height: 60vh;
         min-height: 350px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 30px;
+    }
+
+    .product-slide {
+        width: min(220px, 50vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(180px, 40vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.5;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(180px, 40vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.5;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
     }
 
     .product-slider__btn {
@@ -396,45 +735,407 @@
         right: 10px;
     }
 
+    .product-slide__title {
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================
+   LARGE MOBILE (385px - 480px)
+   iPhone 12, 13, 14, 14 Pro - FIX PADDING
+   ============================================ */
+
+@media (min-width: 385px) and (max-width: 480px) {
+    .product-slider-section {
+        height: 55vh;
+        min-height: 300px;
+        background: #ffffff;
+        padding-top: 80px;
+        padding-bottom: 40px;
+    }
+
+    .product-slider {
+        padding: 0 15px;
+    }
+
     .product-slide {
-        width: min(220px, 50vw);
+        width: min(160px, 55vw);
     }
 
     .product-slide[data-previous] {
-        --slide-tx: calc(-1 * min(180px, 40vw));
-        --slide-scale: 0.75;
-        --slide-opacity: 0.5;
+        --slide-tx: calc(-1 * min(140px, 48vw));
+        --slide-scale: 0.65;
+        --slide-opacity: 0.3;
+        z-index: 15;
     }
 
     .product-slide[data-next] {
-        --slide-tx: calc(1 * min(180px, 40vw));
-        --slide-scale: 0.75;
-        --slide-opacity: 0.5;
+        --slide-tx: calc(1 * min(140px, 48vw));
+        --slide-scale: 0.65;
+        --slide-opacity: 0.3;
+        z-index: 15;
     }
 
     .product-slide[data-previous-2],
     .product-slide[data-next-2] {
         --slide-opacity: 0;
     }
-}
 
-@media (max-width: 480px) {
-    .product-slider-section {
-        height: 40vh;
-        min-height: 300px;
+    .product-slider__btn {
+        --size: 36px;
     }
 
-    .product-slide[data-previous],
-    .product-slide[data-next] {
-        --slide-opacity: 0.3;
+    .product-slider__btn--prev {
+        left: 8px;
+    }
+
+    .product-slider__btn--next {
+        right: 8px;
+    }
+
+    .product-slider__btn svg {
+        width: 18px;
+        height: 18px;
     }
 
     .product-slide__title {
+        font-size: 0.95rem;
+        letter-spacing: 0.8px;
+    }
+
+    .product-slide__overlay {
+        padding: 20px 15px;
+    }
+
+    .product-slider-section .section-header {
+        top: 15px;
+    }
+
+    .product-slider-section .section-header h2 {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+}
+
+/* ============================================
+   SMALL MOBILE (321px - 384px)
+   iPhone SE - FIX PADDING & LAYOUT
+   ============================================ */
+
+@media (min-width: 321px) and (max-width: 384px) {
+    .product-slider-section {
+        height: 50vh;
+        min-height: 280px;
+        background: #ffffff;
+        padding-top: 70px;
+        padding-bottom: 35px;
+    }
+
+    .product-slider {
+        padding: 0 12px;
+    }
+
+    .product-slide {
+        width: min(145px, 58vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(125px, 50vw));
+        --slide-scale: 0.6;
+        --slide-opacity: 0.25;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(125px, 50vw));
+        --slide-scale: 0.6;
+        --slide-opacity: 0.25;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 30px;
+    }
+
+    .product-slider__btn--prev {
+        left: 6px;
+    }
+
+    .product-slider__btn--next {
+        right: 6px;
+    }
+
+    .product-slider__btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .product-slide__title {
+        font-size: 0.85rem;
+        letter-spacing: 0.3px;
+    }
+
+    .product-slide__overlay {
+        padding: 15px 10px;
+    }
+
+    .product-slider-section .section-header {
+        top: 12px;
+    }
+
+    .product-slider-section .section-header h2 {
         font-size: 1rem;
         letter-spacing: 1px;
     }
 }
+
+/* ============================================
+   VERY SMALL MOBILE (Below 320px)
+   Old feature phones
+   ============================================ */
+
+@media (max-width: 320px) {
+    .product-slider-section {
+        height: 48vh;
+        min-height: 270px;
+        background: #ffffff;
+        padding-top: 65px;
+        padding-bottom: 30px;
+    }
+
+    .product-slider {
+        padding: 0 10px;
+    }
+
+    .product-slide {
+        width: min(130px, 62vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(110px, 52vw));
+        --slide-scale: 0.55;
+        --slide-opacity: 0.22;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(110px, 52vw));
+        --slide-scale: 0.55;
+        --slide-opacity: 0.22;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 28px;
+    }
+
+    .product-slider__btn--prev {
+        left: 4px;
+    }
+
+    .product-slider__btn--next {
+        right: 4px;
+    }
+
+    .product-slider__btn svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .product-slide__title {
+        font-size: 0.8rem;
+        letter-spacing: 0px;
+    }
+
+    .product-slide__overlay {
+        padding: 12px 8px;
+    }
+
+    .product-slider-section .section-header {
+        top: 10px;
+    }
+
+    .product-slider-section .section-header h2 {
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+    .product-slider__btn {
+        width: calc(var(--size) + 10px);
+        height: calc(var(--size) + 10px);
+    }
+
+    .product-slide__inner {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION ADJUSTMENTS
+   ============================================ */
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .product-slider-section {
+        height: 90vh;
+        min-height: 350px;
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+
+    .product-slider-section .section-header {
+        top: 12px;
+    }
+
+    .product-slider-section .section-header h2 {
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    }
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .product-slide,
+    .product-slider__btn,
+    .product-slide__image {
+        transition: none;
+    }
+}
+
+/* ============================================
+   HIGH PIXEL DENSITY SCREENS
+   ============================================ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .product-slide {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* ============================================
+   DARK MODE SUPPORT - KEEP WHITE BACKGROUND
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    .product-slider-section {
+        background: #ffffff !important;
+    }
+
+    .product-slider {
+        background: #ffffff !important;
+    }
+
+    .product-slides__wrapper {
+        background: #ffffff !important;
+    }
+
+    .product-slides {
+        background: #ffffff !important;
+    }
+
+    .product-slider__btn {
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+    .product-slider__btn:hover {
+        background: rgba(0, 0, 0, 0.12);
+    }
+
+    .product-slider__btn svg {
+        stroke: #333;
+    }
+
+    .product-slider-section .section-header h2 {
+        color: #333;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY FEATURES
+   ============================================ */
+
+.product-slider__btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.product-slider__btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* ========== END PRODUCT CATEGORY SLIDER ========== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -568,7 +1269,7 @@
                         <a href="shop.html?category=safety-helmet" class="product-slide__inner">
                             <img class="product-slide__image" src="assets/images/safety-helmet.png" alt="Safety Helmet" />
                             <div class="product-slide__overlay">
-                                <h3 class="product-slide__title">Safety Helmet</h3>
+                                <h3 class="product-slide__title">Safty heat vision with helmet</h3>
                             </div>
                         </a>
                     </div>
