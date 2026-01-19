@@ -180,11 +180,12 @@
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, 280px);
     gap: 2rem;
     margin-bottom: 3rem;
     padding: 0 2rem;
     max-width: 100%;
+    justify-content: center;
 }
 
 .product-card {
@@ -199,7 +200,6 @@
     min-height: 400px;
     width: 100%;
     max-width: 280px;
-    margin: 0 auto;
 }
 
 .product-card:hover {
@@ -360,9 +360,13 @@
     }
 
     .products-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, 200px);
         gap: 1.5rem;
         padding: 0 1rem;
+    }
+
+    .product-card {
+        max-width: 200px;
     }
 
     .product-filters {
@@ -386,6 +390,11 @@
 
     .products-grid {
         grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .product-card {
+        max-width: 280px;
     }
 }
 
@@ -613,6 +622,20 @@
                         <button class="see-more-btn">See More</button>
                         <div class="product-footer">
                             <button class="buy-btn" data-product="Shoe Cover Dispenser">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="product-card" data-category="safety-helmet">
+                    <img src="assets/images/WhatsApp Image 2026-01-19 at 20.35.50.jpeg" alt="Safety Visor" class="product-image-img">
+                    <div class="product-info">
+                        <div class="product-category">Safety Helmet</div>
+                        <h3 class="product-title">Safety Helmet</h3>
+                        <p class="product-description">Engineered for reliable head protection, our safety helmet shields workers from falling objects, impacts, and electrical hazards. Made from high-density, impact-resistant materials, it ensures long-lasting durability even in tough environments. Features adjustable suspension system.</p>
+                        <button class="see-more-btn">See More</button>
+                        <div class="product-footer">
+                            <button class="buy-btn" data-product="Safety Heat Visor">Buy</button>
                         </div>
                     </div>
                 </div>
