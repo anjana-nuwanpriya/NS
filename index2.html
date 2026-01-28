@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <link rel="icon" type="image/jpeg" href="assets/images/1726638129909.jpeg">
+
+
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NS HOLDINGS ENGINEERING (PVT) LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* LOADING SCREEN STYLES */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-container {
+            text-align: center;
+        }
+
+        /* Animated Logo */
+        .loading-logo {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 60px;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        .loading-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Spinner Animation - Hidden */
+        .spinner {
+            display: none;
+        }
+
+        /* Loading Text - Hidden */
+        .loading-text {
+            display: none;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 250px;
+            height: 3px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #666666;
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Loading Percentage */
+        .loading-percentage {
+            color: #999999;
+            font-size: 14px;
+            margin-top: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Mobile Navigation */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.95);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: left 0.3s ease;
+                z-index: 1001;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu a {
+                color: #fff;
+                font-size: 1.2rem;
+                text-decoration: none;
+            }
+
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                z-index: 1002;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+            }
+
+            .search-icon {
+                margin-top: 2rem;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========== PRODUCT CATEGORY SLIDER ========== */
+
+.product-slider-section {
+    height: 70vh;
+    min-height: 550px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-slider {
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 80px;
+    background: #ffffff !important;
+}
+
+.product-slider__btn {
+    --size: 50px;
+    width: var(--size);
+    height: var(--size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    touch-action: manipulation;
+}
+
+.product-slider__btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.product-slider__btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.product-slider__btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: #333;
+}
+
+.product-slider__btn--prev {
+    left: 20px;
+}
+
+.product-slider__btn--next {
+    right: 20px;
+}
+
+.product-slides__wrapper {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    position: relative;
+    background: #ffffff !important;
+}
+
+.product-slides__wrapper > * {
+    grid-area: 1 / -1;
+}
+
+.product-slides {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    background: #ffffff !important;
+}
+
+.product-slides > * {
+    grid-area: 1 / -1;
+}
+
+.product-slide {
+    --slide-tx: 0px;
+    --slide-scale: 0.7;
+    --slide-opacity: 0;
+    width: min(280px, 35vw);
+    aspect-ratio: 3 / 4;
+    user-select: none;
+    perspective: 800px;
+    transform: translateX(var(--slide-tx)) scale(var(--slide-scale));
+    opacity: var(--slide-opacity);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    pointer-events: none;
+    position: relative;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
+.product-slide[data-current] {
+    --slide-tx: 0px;
+    --slide-scale: 1;
+    --slide-opacity: 1;
+    pointer-events: auto;
+    z-index: 20;
+}
+
+.product-slide[data-previous] {
+    --slide-tx: calc(-1 * min(200px, 28vw));
+    --slide-scale: 0.85;
+    --slide-opacity: 0.7;
+    z-index: 15;
+}
+
+.product-slide[data-next] {
+    --slide-tx: calc(1 * min(200px, 28vw));
+    --slide-scale: 0.85;
+    --slide-opacity: 0.7;
+    z-index: 15;
+}
+
+/* Additional slides for 5-slide view */
+.product-slide[data-previous-2] {
+    --slide-tx: calc(-2 * min(200px, 28vw));
+    --slide-scale: 0.7;
+    --slide-opacity: 0.5;
+    z-index: 10;
+}
+
+.product-slide[data-next-2] {
+    --slide-tx: calc(2 * min(200px, 28vw));
+    --slide-scale: 0.7;
+    --slide-opacity: 0.5;
+    z-index: 10;
+}
+
+.product-slide__inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    display: block;
+    text-decoration: none;
+}
+
+.product-slide[data-current] .product-slide__inner:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+}
+
+.product-slide__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-slide[data-current] .product-slide__inner:hover .product-slide__image {
+    transform: scale(1.05);
+}
+
+.product-slide__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.product-slide__title {
+    color: #fff;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 0;
+}
+
+/* Section Title */
+.product-slider-section .section-header {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 50;
+}
+
+.product-slider-section .section-header h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+/* ============================================
+   EXTRA LARGE SCREENS (1920px+)
+   ============================================ */
+
+@media (min-width: 1920px) {
+    .product-slider-section {
+        height: 75vh;
+        min-height: 600px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 100px;
+    }
+
+    .product-slide {
+        width: min(350px, 30vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(250px, 25vw));
+        --slide-scale: 0.88;
+        --slide-opacity: 0.75;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(250px, 25vw));
+        --slide-scale: 0.88;
+        --slide-opacity: 0.75;
+    }
+
+    .product-slide[data-previous-2] {
+        --slide-tx: calc(-2 * min(250px, 25vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.6;
+    }
+
+    .product-slide[data-next-2] {
+        --slide-tx: calc(2 * min(250px, 25vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.6;
+    }
+
+    .product-slider__btn {
+        --size: 60px;
+    }
+}
+
+/* ============================================
+   LARGE SCREENS (1366px - 1919px)
+   ============================================ */
+
+@media (min-width: 1366px) and (max-width: 1919px) {
+    .product-slider-section {
+        height: 72vh;
+        min-height: 550px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 80px;
+    }
+
+    .product-slide {
+        width: min(320px, 32vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(230px, 26vw));
+        --slide-scale: 0.85;
+        --slide-opacity: 0.72;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(230px, 26vw));
+        --slide-scale: 0.85;
+        --slide-opacity: 0.72;
+    }
+
+    .product-slide[data-previous-2] {
+        --slide-tx: calc(-2 * min(230px, 26vw));
+        --slide-scale: 0.72;
+        --slide-opacity: 0.55;
+    }
+
+    .product-slide[data-next-2] {
+        --slide-tx: calc(2 * min(230px, 26vw));
+        --slide-scale: 0.72;
+        --slide-opacity: 0.55;
+    }
+
+    .product-slider__btn {
+        --size: 55px;
+    }
+}
+
+/* ============================================
+   DESKTOP (1025px - 1365px)
+   ============================================ */
+
+@media (min-width: 1025px) and (max-width: 1365px) {
+    .product-slider-section {
+        height: 70vh;
+        min-height: 500px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 60px;
+    }
+
+    .product-slide {
+        width: min(280px, 32vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(200px, 26vw));
+        --slide-scale: 0.83;
+        --slide-opacity: 0.68;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(200px, 26vw));
+        --slide-scale: 0.83;
+        --slide-opacity: 0.68;
+    }
+
+    .product-slide[data-previous-2] {
+        --slide-tx: calc(-2 * min(200px, 26vw));
+        --slide-scale: 0.68;
+        --slide-opacity: 0.5;
+    }
+
+    .product-slide[data-next-2] {
+        --slide-tx: calc(2 * min(200px, 26vw));
+        --slide-scale: 0.68;
+        --slide-opacity: 0.5;
+    }
+
+    .product-slider__btn {
+        --size: 50px;
+    }
+
+    .product-slider__btn--prev {
+        left: 20px;
+    }
+
+    .product-slider__btn--next {
+        right: 20px;
+    }
+}
+
+/* ============================================
+   TABLET LANDSCAPE (1024px)
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .product-slider-section {
+        height: 65vh;
+        min-height: 450px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 50px;
+    }
+
+    .product-slide {
+        width: min(260px, 38vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(180px, 32vw));
+        --slide-scale: 0.80;
+        --slide-opacity: 0.65;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(180px, 32vw));
+        --slide-scale: 0.80;
+        --slide-opacity: 0.65;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 45px;
+    }
+
+    .product-slider__btn--prev {
+        left: 15px;
+    }
+
+    .product-slider__btn--next {
+        right: 15px;
+    }
+}
+
+/* ============================================
+   TABLET PORTRAIT (769px - 1023px)
+   ============================================ */
+
+@media (min-width: 769px) and (max-width: 1023px) {
+    .product-slider-section {
+        height: 60vh;
+        min-height: 400px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 40px;
+    }
+
+    .product-slide {
+        width: min(240px, 42vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(160px, 35vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.58;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(160px, 35vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.58;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 40px;
+    }
+
+    .product-slider__btn--prev {
+        left: 12px;
+    }
+
+    .product-slider__btn--next {
+        right: 12px;
+    }
+
+    .product-slide__title {
+        font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================
+   SMALL TABLET (481px - 768px)
+   ============================================ */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .product-slider-section {
+        height: 60vh;
+        min-height: 350px;
+        background: #ffffff;
+    }
+
+    .product-slider {
+        padding: 0 30px;
+    }
+
+    .product-slide {
+        width: min(220px, 50vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(180px, 40vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.5;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(180px, 40vw));
+        --slide-scale: 0.75;
+        --slide-opacity: 0.5;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 40px;
+    }
+
+    .product-slider__btn--prev {
+        left: 10px;
+    }
+
+    .product-slider__btn--next {
+        right: 10px;
+    }
+
+    .product-slide__title {
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================
+   LARGE MOBILE (385px - 480px)
+   iPhone 12, 13, 14, 14 Pro - FIX PADDING
+   ============================================ */
+
+@media (min-width: 385px) and (max-width: 480px) {
+    .product-slider-section {
+        height: 55vh;
+        min-height: 300px;
+        background: #ffffff;
+        padding-top: 80px;
+        padding-bottom: 40px;
+    }
+
+    .product-slider {
+        padding: 0 15px;
+    }
+
+    .product-slide {
+        width: min(160px, 55vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(140px, 48vw));
+        --slide-scale: 0.65;
+        --slide-opacity: 0.3;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(140px, 48vw));
+        --slide-scale: 0.65;
+        --slide-opacity: 0.3;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 36px;
+    }
+
+    .product-slider__btn--prev {
+        left: 8px;
+    }
+
+    .product-slider__btn--next {
+        right: 8px;
+    }
+
+    .product-slider__btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .product-slide__title {
+        font-size: 0.95rem;
+        letter-spacing: 0.8px;
+    }
+
+    .product-slide__overlay {
+        padding: 20px 15px;
+    }
+
+    .product-slider-section .section-header {
+        top: 15px;
+    }
+
+    .product-slider-section .section-header h2 {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+}
+
+/* ============================================
+   SMALL MOBILE (321px - 384px)
+   iPhone SE - FIX PADDING & LAYOUT
+   ============================================ */
+
+@media (min-width: 321px) and (max-width: 384px) {
+    .product-slider-section {
+        height: 50vh;
+        min-height: 280px;
+        background: #ffffff;
+        padding-top: 70px;
+        padding-bottom: 35px;
+    }
+
+    .product-slider {
+        padding: 0 12px;
+    }
+
+    .product-slide {
+        width: min(145px, 58vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(125px, 50vw));
+        --slide-scale: 0.6;
+        --slide-opacity: 0.25;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(125px, 50vw));
+        --slide-scale: 0.6;
+        --slide-opacity: 0.25;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 30px;
+    }
+
+    .product-slider__btn--prev {
+        left: 6px;
+    }
+
+    .product-slider__btn--next {
+        right: 6px;
+    }
+
+    .product-slider__btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .product-slide__title {
+        font-size: 0.85rem;
+        letter-spacing: 0.3px;
+    }
+
+    .product-slide__overlay {
+        padding: 15px 10px;
+    }
+
+    .product-slider-section .section-header {
+        top: 12px;
+    }
+
+    .product-slider-section .section-header h2 {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================
+   VERY SMALL MOBILE (Below 320px)
+   Old feature phones
+   ============================================ */
+
+@media (max-width: 320px) {
+    .product-slider-section {
+        height: 48vh;
+        min-height: 270px;
+        background: #ffffff;
+        padding-top: 65px;
+        padding-bottom: 30px;
+    }
+
+    .product-slider {
+        padding: 0 10px;
+    }
+
+    .product-slide {
+        width: min(130px, 62vw);
+    }
+
+    .product-slide[data-previous] {
+        --slide-tx: calc(-1 * min(110px, 52vw));
+        --slide-scale: 0.55;
+        --slide-opacity: 0.22;
+        z-index: 15;
+    }
+
+    .product-slide[data-next] {
+        --slide-tx: calc(1 * min(110px, 52vw));
+        --slide-scale: 0.55;
+        --slide-opacity: 0.22;
+        z-index: 15;
+    }
+
+    .product-slide[data-previous-2],
+    .product-slide[data-next-2] {
+        --slide-opacity: 0;
+    }
+
+    .product-slider__btn {
+        --size: 28px;
+    }
+
+    .product-slider__btn--prev {
+        left: 4px;
+    }
+
+    .product-slider__btn--next {
+        right: 4px;
+    }
+
+    .product-slider__btn svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .product-slide__title {
+        font-size: 0.8rem;
+        letter-spacing: 0px;
+    }
+
+    .product-slide__overlay {
+        padding: 12px 8px;
+    }
+
+    .product-slider-section .section-header {
+        top: 10px;
+    }
+
+    .product-slider-section .section-header h2 {
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+    .product-slider__btn {
+        width: calc(var(--size) + 10px);
+        height: calc(var(--size) + 10px);
+    }
+
+    .product-slide__inner {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION ADJUSTMENTS
+   ============================================ */
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .product-slider-section {
+        height: 90vh;
+        min-height: 350px;
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+
+    .product-slider-section .section-header {
+        top: 12px;
+    }
+
+    .product-slider-section .section-header h2 {
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    }
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .product-slide,
+    .product-slider__btn,
+    .product-slide__image {
+        transition: none;
+    }
+}
+
+/* ============================================
+   HIGH PIXEL DENSITY SCREENS
+   ============================================ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .product-slide {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* ============================================
+   DARK MODE SUPPORT - KEEP WHITE BACKGROUND
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    .product-slider-section {
+        background: #ffffff !important;
+    }
+
+    .product-slider {
+        background: #ffffff !important;
+    }
+
+    .product-slides__wrapper {
+        background: #ffffff !important;
+    }
+
+    .product-slides {
+        background: #ffffff !important;
+    }
+
+    .product-slider__btn {
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+    .product-slider__btn:hover {
+        background: rgba(0, 0, 0, 0.12);
+    }
+
+    .product-slider__btn svg {
+        stroke: #333;
+    }
+
+    .product-slider-section .section-header h2 {
+        color: #333;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY FEATURES
+   ============================================ */
+
+.product-slider__btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.product-slider__btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ========== END PRODUCT CATEGORY SLIDER ========== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-container">
+            <!-- <div class="loading-logo">
+                <img src="assets/images/logo (1).png" alt="NS Holdings Logo">
+            </div> -->
+            <div class="spinner"></div>
+            <div class="loading-text">NS HOLDINGS ENGINEERING (PVT) LTD</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loading-percentage" id="loadingPercentage">0%</div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scroll-progress"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo links to index.html -->
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="assets/images/logo (1).png" alt="Logo" class="logo-image">
+                </a>
+            </div>
+
+            <!-- Nav menu -->
+            <ul class="nav-menu">
+                <li><a href="expertise.html">EXPERTISE</a></li>
+                <li><a href="projects.html">PROJECTS</a></li>
+                <li><a href="careers.html">CAREERS</a></li>
+                   <li><a href="shop.html">SHOP</a></li>
+                <li><a href="contact.html">CONTACT US</a></li>
+               
+            </ul>
+
+            <!-- Hamburger menu -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline class="hero-video" id="heroVideo" onloadstart="videoLoadStarted()">
+            <source src="assets/videos/Final NS website video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="hero-content">
+            <p>NS HOLDINGS ENGINEERING (PVT) LTD – Your trusted partner in delivering professional safety training, risk assessment programs, engineering consulting support, and high-quality industrial safety solutions across Sri Lanka, committed to creating safer, compliant, and efficient workplaces.</p>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Safety Consultants</h2>
+            <div class="about-content fade-in">
+                <p>NS HOLDINGS ENGINEERING (PVT) LTD  is a multidisciplinary engineering, safety, and risk management consulting company committed to enhancing workplace safety, operational efficiency, and regulatory compliance across multiple industries.</p>
+                <br>
+                <p>With over 10 years of industry exposure, NS HOLDINGS ENGINEERING (PVT) LTD  delivers integrated safety training, engineering consulting support, and industrial safety solutions tailored to organizational needs. Our approach combines technical expertise, practical implementation, and innovative safety practices to help clients create safer and more sustainable working environments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRODUCT CATEGORY SLIDER ========== -->
+    <section class="product-slider-section">
+        <div class="section-header">
+            <h2>Our Products</h2>
+        </div>
+        
+        <div class="product-slider">
+            <button class="product-slider__btn product-slider__btn--prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </button>
+
+            <div class="product-slides__wrapper">
+                <div class="product-slides">
+                    <!-- Slide 1 - Safety Shoe -->
+                    <div class="product-slide" data-index="0">
+                        <a href="shop.html?category=safety-shoe" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/safety-shoe-h01.jpg" alt="Safety Shoe" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Safety Shoe</h3>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Slide 2 - Safety Boot -->
+                    <div class="product-slide" data-index="1">
+                        <a href="shop.html?category=safety-boot" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/safety-boot-yellow-steel.jpg" alt="Safety Boot" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Safety Boot</h3>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Slide 3 - Lab Shoe -->
+                    <div class="product-slide" data-index="2">
+                        <a href="shop.html?category=lab-shoe" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/lab-shoe1.jpg" alt="Lab Shoe" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Lab Shoe</h3>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Slide 4 - Shoe Dispenser -->
+                    <div class="product-slide" data-index="3">
+                        <a href="shop.html?category=shoe-dispenser" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/shoe-cover-dispenser.jpeg" alt="Shoe Dispenser" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Shoe Cover Dispenser</h3>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Slide 5 - Safety Helmet -->
+                    <div class="product-slide" data-index="4">
+                        <a href="shop.html?category=safety-helmet" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/safety-helmet.png" alt="Safety Helmet" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">SAFETY HEAT VISOR with helmet</h3>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Slide 6 - Spill Kit -->
+                    <div class="product-slide" data-index="5">
+                        <a href="shop.html?category=spill-kit" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/spill-kit.jpeg" alt="Spill Kit" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Spill Kit</h3>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Slide 8 - Spill Kit Bin -->
+<div class="product-slide" data-index="8">
+    <a href="shop.html?category=spill-kit-bin" class="product-slide__inner">
+        <img class="product-slide__image" src="assets/images/3fc553e6-2674-43bb-b6f5-bca5d5ff8826.jpeg" alt="Spill Kit Bin" />
+        <div class="product-slide__overlay">
+            <h3 class="product-slide__title">Spill Kit Bin</h3>
+        </div>
+    </a>
+</div>
+                    <!-- Slide 7 - Uniform -->
+                    <div class="product-slide" data-index="6">
+                        <a href="shop.html?category=uniform" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/Screenshot 2026-01-08 at 21.04.26.png" alt="Uniform" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">Uniform</h3>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Slide 9 - Sign Boards -->
+                    <div class="product-slide" data-index="7">
+                        <a href="shop.html?category=sign-boards" class="product-slide__inner">
+                            <img class="product-slide__image" src="assets/images/WhatsApp Image 2026-01-08 at 21.01.35.jpeg" alt="Sign Boards" />
+                            <div class="product-slide__overlay">
+                                <h3 class="product-slide__title">PVC Sign Boards</h3>
+                            </div>
+                        </a>
+                    </div>
+
+
+
+<!-- Slide 10 - PVC Sign Boards -->
+<div class="product-slide" data-index="9">
+    <a href="shop.html?category=pvc-sign-boards" class="product-slide__inner">
+        <img class="product-slide__image" src="assets/images/1992d60e-2a32-4c74-8f48-024c2ea3bdda.jpeg" alt="PVC Sign Boards" />
+        <div class="product-slide__overlay">
+            <h3 class="product-slide__title">Reflective Sign Boards</h3>
+        </div>
+    </a>
+</div>
+
+<!-- Slide 11 - Reflective Sign Boards -->
+<div class="product-slide" data-index="10">
+    <a href="shop.html?category=reflective-sign-boards" class="product-slide__inner">
+        <img class="product-slide__image" src="assets/images/ed434a31-5f1f-4fa0-842a-44b3f15b63bf.jpeg" alt="Reflective Sign Boards" />
+        <div class="product-slide__overlay">
+            <h3 class="product-slide__title">Radium Sign Boards</h3>
+        </div>
+    </a>
+</div>
+
+<!-- Slide 12 - Radium Sign Boards -->
+<div class="product-slide" data-index="11">
+    <a href="shop.html?category=radium-sign-boards" class="product-slide__inner">
+        <img class="product-slide__image" src="assets/images/Evacuation-Route-Map-Design-Template-edit-online.jpeg" alt="Radium Sign Boards" />
+        <div class="product-slide__overlay">
+            <h3 class="product-slide__title">Evacuation Maps</h3>
+        </div>
+    </a>
+</div>
+
+
+
+                </div>
+            </div>
+
+            <button class="product-slider__btn product-slider__btn--next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </section>
+    <!-- ========== END PRODUCT CATEGORY SLIDER ========== -->
+
+
+
+    <!-- UPDATED TOGGLE SECTIONS WITH SEPARATE STYLING -->
+    <div class="toggle-sections-container">
+        <div class="toggle-section" id="connected">
+            <div class="toggle-section-header" onclick="toggleSection('connected')">
+                <h2 class="toggle-section-title">We Are Connected</h2>
+                <div class="toggle-icon"></div>
+            </div>
+            <div class="toggle-section-content">
+                <div class="toggle-content-inner">
+                    <div class="toggle-credential-item">Working closely with industry partners, safety professionals, and engineering specialists to deliver effective Risk Assessment and Occupational Safety & Health (OSH) Training Programs.</div>
+                    <div class="toggle-credential-item">Collaborating with engineering consultants, safety solution providers, and suppliers to support innovative and practical workplace safety solutions.</div>
+                    <div class="toggle-credential-item">Maintaining strong relationships with PPE manufacturers, safety signage providers, and emergency planning specialists to ensure reliable and compliant safety supplies.</div>
+                    <div class="toggle-credential-item">Actively engaging with organizations, institutions, and industry stakeholders to promote best practices in occupational safety, risk management, and engineering support services.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toggle-section" id="experienced">
+            <div class="toggle-section-header" onclick="toggleSection('experienced')">
+                <h2 class="toggle-section-title">We Are Experienced</h2>
+                <div class="toggle-icon"></div>
+            </div>
+            <div class="toggle-section-content">
+                <div class="toggle-content-inner">
+                    <div class="toggle-credential-item">Extensive experience in delivering Risk Assessment and Occupational Safety & Health (OSH) Training Programs across diverse industries.</div>
+                    <div class="toggle-credential-item">Proven capability in providing engineering consulting support and innovative safety solutions tailored to complex operational environments.</div>
+                    <div class="toggle-credential-item">Successfully supporting organizations with PPE supply, SMETA-compliant safety sign boards, emergency evacuation map design, and maintenance items supply.</div>
+                    <div class="toggle-credential-item">Strong track record in planning, coordination, and delivery of safety-focused consulting and training initiatives, ensuring practical implementation and measurable results.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toggle-section" id="professional">
+            <div class="toggle-section-header" onclick="toggleSection('professional')">
+                <h2 class="toggle-section-title">We Are Professionals</h2>
+                <div class="toggle-icon"></div>
+            </div>
+            <div class="toggle-section-content">
+                <div class="toggle-content-inner">
+                    <div class="toggle-credential-item">A trusted provider of Risk Assessment and Occupational Safety & Health (OSH) Training Programs, supporting organizations in building safer and compliant workplaces.</div>
+                    <div class="toggle-credential-item">Delivering engineering consulting support and innovative safety solutions, tailored to industry-specific operational and regulatory requirements.</div>
+                    <div class="toggle-credential-item">Supplying certified Personal Protective Equipment (PPE), SMETA-compliant safety sign boards, emergency evacuation maps, and essential maintenance items to enhance workplace safety and preparedness.</div>
+                    <div class="toggle-credential-item">Committed to professional standards, continuous improvement, and best practices in engineering, safety management, and risk control across diverse industries.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section expertise">
+        <span>Expertise</span>
+    </div>
+
+    <div class="section projects">
+        <span>Projects</span>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <!-- Company Logo -->
+            <div class="footer-logo">
+                <img src="assets/images/black.png" alt="Company Logo">
+            </div>
+
+            <div class="footer-content">
+                 <div class="footer-section">
+        <h3>General</h3>
+        <ul>
+         <li><a href="index.html">Home</a></li>
+            <li><a href="expertise.html">Expertise</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="careers.html">Careers</a></li>
+             <li><a href="shop.html">Shop</a></li>
+        </ul>
+    </div>
+                <div class="footer-section">
+                    <h3>Expertise</h3>
+                    <ul>
+                        <li><a href="#">Educational Infrastructure</a></li>
+                        <li><a href="#">Healthcare Facilities</a></li>
+                        <li><a href="#">Corporate Office Complexes</a></li>
+                        <li><a href="#">Production Facility Infrastructure</a></li>
+                        <li><a href="#">Landscape & Urbanism</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Social</h3>
+                 <ul class="social-links">
+    <li>
+        <a href="https://www.facebook.com/profile.php?id=61565526883201" target="_blank" rel="noopener">
+            Facebook
+        </a>
+    </li>
+    <li>
+        <a href="https://www.linkedin.com/company/ns-holdings-engineering-pvt-ltd/" target="_blank" rel="noopener">
+            LinkedIn
+        </a>
+    </li>
+</ul>
+
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Copyright © 2025 NS HOLDINGS ENGINEERING (PVT) LTD. Designed by @ZIP SOLUTIONS</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // LOADING SCREEN FUNCTIONALITY - SHOW ONLY ON FIRST PAGE LOAD
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const progressBar = document.getElementById('progressBar');
+            const loadingPercentage = document.getElementById('loadingPercentage');
+            const heroVideo = document.getElementById('heroVideo');
+
+            // Check if this is the first time loading (not a repeat navigation)
+            const hasLoaded = sessionStorage.getItem('nsHoldingsLoaded');
+            
+            // If already loaded once in this session, hide loading screen immediately
+            if (hasLoaded) {
+                loadingScreen.classList.add('hidden');
+                return;
+            }
+
+            // Mark that we've loaded once
+            sessionStorage.setItem('nsHoldingsLoaded', 'true');
+
+            let loadingScreenHidden = false;
+            let progress = 0;
+
+            // Function to hide loading screen
+            function hideLoadingScreen() {
+                if (!loadingScreenHidden) {
+                    loadingScreenHidden = true;
+                    progressBar.style.width = '100%';
+                    loadingPercentage.textContent = '100%';
+                    
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                    }, 300);
+                }
+            }
+
+            // Function to update progress bar
+            function updateProgress(percent) {
+                if (percent <= 100) {
+                    progressBar.style.width = percent + '%';
+                    loadingPercentage.textContent = Math.round(percent) + '%';
+                }
+            }
+
+            // Simulate progress while waiting for video to load
+            let simulatedProgress = 0;
+            let simulationStarted = false;
+            const simulationInterval = setInterval(() => {
+                if (!progressTracked && !simulationStarted) {
+                    simulationStarted = true;
+                }
+                if (!progressTracked && simulatedProgress < 85) {
+                    simulatedProgress += Math.random() * 12;
+                    if (simulatedProgress > 85) simulatedProgress = 85;
+                    updateProgress(simulatedProgress);
+                }
+            }, 600);
+
+            // Track video loading progress - only on first load
+            let progressTracked = false;
+            
+            heroVideo.addEventListener('progress', () => {
+                // Only track progress once until it reaches target
+                if (progressTracked) return;
+                
+                if (heroVideo.buffered.length > 0) {
+                    const bufferedEnd = heroVideo.buffered.end(heroVideo.buffered.length - 1);
+                    const duration = heroVideo.duration;
+                    
+                    if (duration > 0) {
+                        progress = (bufferedEnd / duration) * 100;
+                        // Use whichever is higher: simulated or real
+                        if (progress > simulatedProgress) {
+                            simulatedProgress = progress;
+                            updateProgress(progress);
+                        }
+                        
+                        // Close loading screen as soon as it reaches 85% or real progress is high
+                        if (progress >= 85 && !loadingScreenHidden) {
+                            progressTracked = true;
+                            clearInterval(simulationInterval);
+                            updateProgress(100);
+                            hideLoadingScreen();
+                        }
+                    }
+                }
+            });
+
+            // Fallback: Auto-hide after 30 seconds if video doesn't trigger canplay
+            setTimeout(() => {
+                if (!loadingScreenHidden) {
+                    progress = 100;
+                    updateProgress(progress);
+                    clearInterval(progressInterval);
+                    hideLoadingScreen();
+                }
+            }, 30000);
+        });
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navMenu.contains(event.target);
+                const isClickOnHamburger = hamburger.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+
+            // Services horizontal scroll with arrows
+            const servicesGrid = document.querySelector('.services-grid');
+            const leftArrow = document.getElementById('scrollLeft');
+            const rightArrow = document.getElementById('scrollRight');
+
+            if (servicesGrid && leftArrow && rightArrow) {
+                function updateArrows() {
+                    const scrollLeft = servicesGrid.scrollLeft;
+                    const maxScroll = servicesGrid.scrollWidth - servicesGrid.clientWidth;
+                    
+                    if (scrollLeft > 0) {
+                        leftArrow.style.display = 'flex';
+                    } else {
+                        leftArrow.style.display = 'none';
+                    }
+                    
+                    if (scrollLeft >= maxScroll - 5) {
+                        rightArrow.style.display = 'none';
+                    } else {
+                        rightArrow.style.display = 'flex';
+                    }
+                }
+                
+                rightArrow.addEventListener('click', () => {
+                    const cardWidth = servicesGrid.querySelector('.service-card').offsetWidth;
+                    servicesGrid.scrollBy({
+                        left: cardWidth + 30,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                leftArrow.addEventListener('click', () => {
+                    const cardWidth = servicesGrid.querySelector('.service-card').offsetWidth;
+                    servicesGrid.scrollBy({
+                        left: -(cardWidth + 30),
+                        behavior: 'smooth'
+                    });
+                });
+                
+                servicesGrid.addEventListener('scroll', updateArrows);
+                updateArrows();
+                window.addEventListener('resize', updateArrows);
+            }
+        });
+
+       // ========== PRODUCT CATEGORY SLIDER ==========
+(function() {
+    const TOTAL_SLIDES = 12;
+    let currentIndex = 0;
+
+    const wrap = (n, max) => ((n % max) + max) % max;
+
+    function getSlideByIndex(index) {
+        return document.querySelector(`.product-slide[data-index="${index}"]`);
+    }
+
+    function updateSlider() {
+        const prevIndex = wrap(currentIndex - 1, TOTAL_SLIDES);
+        const nextIndex = wrap(currentIndex + 1, TOTAL_SLIDES);
+        const prev2Index = wrap(currentIndex - 2, TOTAL_SLIDES);
+        const next2Index = wrap(currentIndex + 2, TOTAL_SLIDES);
+
+        // Clear all states
+        document.querySelectorAll('.product-slide').forEach(el => {
+            el.removeAttribute('data-current');
+            el.removeAttribute('data-previous');
+            el.removeAttribute('data-next');
+            el.removeAttribute('data-previous-2');
+            el.removeAttribute('data-next-2');
+        });
+
+        // Set states for 5 slides
+        const currentSlide = getSlideByIndex(currentIndex);
+        const prevSlide = getSlideByIndex(prevIndex);
+        const nextSlide = getSlideByIndex(nextIndex);
+        const prev2Slide = getSlideByIndex(prev2Index);
+        const next2Slide = getSlideByIndex(next2Index);
+
+        if (currentSlide) currentSlide.setAttribute('data-current', '');
+        if (prevSlide) prevSlide.setAttribute('data-previous', '');
+        if (nextSlide) nextSlide.setAttribute('data-next', '');
+        if (prev2Slide) prev2Slide.setAttribute('data-previous-2', '');
+        if (next2Slide) next2Slide.setAttribute('data-next-2', '');
+    }
+
+    function changeSlide(direction) {
+        currentIndex = wrap(currentIndex + direction, TOTAL_SLIDES);
+        updateSlider();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        const prevBtn = document.querySelector('.product-slider__btn--prev');
+        const nextBtn = document.querySelector('.product-slider__btn--next');
+
+        if (prevBtn && nextBtn) {
+            updateSlider();
+
+            prevBtn.addEventListener('click', () => changeSlide(-1));
+            nextBtn.addEventListener('click', () => changeSlide(1));
+        }
+    });
+})();
+// ========== END PRODUCT CATEGORY SLIDER ==========
+    </script>
+</body>
+</html>
