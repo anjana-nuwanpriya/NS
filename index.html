@@ -1557,15 +1557,22 @@
                 }
             });
 
-            // Fallback: Auto-hide after 30 seconds if video doesn't trigger canplay
-            setTimeout(() => {
+            // Fallback: Auto-hide after 3 seconds or on window load
+            window.addEventListener('load', () => {
                 if (!loadingScreenHidden) {
-                    progress = 100;
-                    updateProgress(progress);
-                    clearInterval(progressInterval);
+                    clearInterval(simulationInterval);
+                    updateProgress(100);
                     hideLoadingScreen();
                 }
-            }, 30000);
+            });
+
+            setTimeout(() => {
+                if (!loadingScreenHidden) {
+                    clearInterval(simulationInterval);
+                    updateProgress(100);
+                    hideLoadingScreen();
+                }
+            }, 3000);
         });
 
         // Mobile menu toggle functionality
