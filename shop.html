@@ -178,6 +178,49 @@
     color: white;
 }
 
+.product-sub-filters {
+    display: none;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: -2.5rem 0 4rem;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+    animation: fadeInSubFilters 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInSubFilters {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sub-filter-btn {
+    padding: 0.25rem 0.7rem;
+    border: 1px dashed #999;
+    background: transparent;
+    color: #888;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    letter-spacing: 0.5px;
+}
+
+.sub-filter-btn.active,
+.sub-filter-btn:hover {
+    background: #888;
+    color: white;
+    border-style: solid;
+    border-color: #888;
+}
+
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 280px);
@@ -210,9 +253,9 @@
 .product-image-img {
     width: 100%;
     height: 250px;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
-    background: #f0f0f0;
+    background: #f8f9fa;
 }
 
 .product-info {
@@ -441,6 +484,16 @@
                 <button class="filter-btn" data-filter="spill-kit">Spill Kit</button>
                 <button class="filter-btn" data-filter="sign-boards">Sign Boards</button>
                 <button class="filter-btn" data-filter="evacuation-maps">Evacuation Maps</button>
+                <button class="filter-btn" data-filter="uniform">Uniform</button>
+            </div>
+            
+            <div class="product-sub-filters" id="uniform-sub-filters">
+                <button class="sub-filter-btn active" data-subfilter="all-uniform">All Uniforms</button>
+                <button class="sub-filter-btn" data-subfilter="uniform-cap">Cap</button>
+                <button class="sub-filter-btn" data-subfilter="uniform-overall">Overall</button>
+                <button class="sub-filter-btn" data-subfilter="uniform-jacket">Jacket</button>
+                <button class="sub-filter-btn" data-subfilter="uniform-t-shirt">T shirt</button>
+                <button class="sub-filter-btn" data-subfilter="uniform-apron">Apron</button>
             </div>
             
             <div class="products-grid">
@@ -785,57 +838,211 @@
         <div class="product-footer">
             <button class="buy-btn" data-product="Evacuation Maps">Buy</button>
         </div>
+</div>
+</div>
+
+<!-- ================= UNIFORM PRODUCTS ================= -->
+<div class="product-card" data-category="uniform-cap">
+    <img src="assets/images/New Products/Cap 1.jpg" alt="Industrial Safety Cap" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">Industrial Safety Cap</h3>
+        <p class="product-description">
+            Comfortable and durable industrial safety cap with an inner protective shell. Provides lightweight head protection against minor bumps and scrapes, featuring high breathability and adjustable sizing for all-day wear.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="Industrial Safety Cap">Buy</button>
+        </div>
     </div>
 </div>
 
-<!-- ================= END NEW PRODUCTS ================= -->
+<div class="product-card" data-category="uniform-overall">
+    <img src="assets/images/New Products/Overall2.JPG" alt="Heavy-Duty Work Overall" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">Heavy-Duty Work Overall</h3>
+        <p class="product-description">
+            Engineered for full-body protection in rugged environments, this heavy-duty work overall is made from premium, tear-resistant canvas fabric. Features multiple utility pockets, reinforced knee panels, and a comfort-fit waistband.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="Heavy-Duty Work Overall">Buy</button>
+        </div>
+    </div>
+</div>
 
+<div class="product-card" data-category="uniform-overall">
+    <img src="assets/images/New Products/Overall(Back)2.jpg" alt="Heavy-Duty Work Overall (Back)" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">Heavy-Duty Work Overall (Back)</h3>
+        <p class="product-description">
+            Engineered for full-body protection in rugged environments, this heavy-duty work overall is made from premium, tear-resistant canvas fabric. Features multiple utility pockets, reinforced knee panels, and a comfort-fit waistband.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="Heavy-Duty Work Overall (Back)">Buy</button>
+        </div>
+    </div>
+</div>
 
+<div class="product-card" data-category="uniform-jacket">
+    <img src="assets/images/New Products/Aloka.jpg" alt="Reflective Safety Jacket" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">Reflective Safety Jacket</h3>
+        <p class="product-description">
+            High-visibility protective jacket featuring high-grade reflective striping for maximum safety in low-light environments. Windproof, water-resistant, and constructed with breathable fabric and multiple functional compartments.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="Reflective Safety Jacket">Buy</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-card" data-category="uniform-jacket">
+    <img src="assets/images/New Products/Aloka 2.JPG" alt="Safety Jacket Variant 2" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">Safety Jacket Variant 2</h3>
+        <p class="product-description">
+            High-visibility protective jacket featuring high-grade reflective striping for maximum safety in low-light environments. Windproof, water-resistant, and constructed with breathable fabric and multiple functional compartments.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="Safety Jacket Variant 2">Buy</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-card" data-category="uniform-jacket">
+    <img src="assets/images/New Products/1000383442.jpg" alt="Safety Jacket Variant 3" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">Safety Jacket Variant 3</h3>
+        <p class="product-description">
+            High-visibility protective jacket featuring high-grade reflective striping for maximum safety in low-light environments. Windproof, water-resistant, and constructed with breathable fabric and multiple functional compartments.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="Safety Jacket Variant 3">Buy</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-card" data-category="uniform-jacket">
+    <img src="assets/images/New Products/IMG-20260424-WA0023.jpg" alt="Safety Jacket Variant 4" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">Safety Jacket Variant 4</h3>
+        <p class="product-description">
+            High-visibility protective jacket featuring high-grade reflective striping for maximum safety in low-light environments. Windproof, water-resistant, and constructed with breathable fabric and multiple functional compartments.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="Safety Jacket Variant 4">Buy</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-card" data-category="uniform-t-shirt">
+    <img src="assets/images/New Products/Shirt 4.jpg" alt="High-Visibility Polo T-Shirt" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">High-Visibility Polo T-Shirt</h3>
+        <p class="product-description">
+            A premium safety polo t-shirt with integrated horizontal reflective strips. Crafted from moisture-wicking and ultra-breathable polyester fabric, it keeps workers dry and comfortable while ensuring maximum visibility.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="High-Visibility Polo T-Shirt">Buy</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-card" data-category="uniform-t-shirt">
+    <img src="assets/images/New Products/Shirt 6.JPG" alt="High-Visibility Polo T-Shirt Variant 2" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">High-Visibility Polo T-Shirt Variant 2</h3>
+        <p class="product-description">
+            A premium safety polo t-shirt with integrated horizontal reflective strips. Crafted from moisture-wicking and ultra-breathable polyester fabric, it keeps workers dry and comfortable while ensuring maximum visibility.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="High-Visibility Polo T-Shirt Variant 2">Buy</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-card" data-category="uniform-apron">
+    <img src="assets/images/New Products/Apron.jpg" alt="Heavy-Duty Protective Apron" class="product-image-img">
+    <div class="product-info">
+        <div class="product-category">Uniform</div>
+        <h3 class="product-title">Heavy-Duty Protective Apron</h3>
+        <p class="product-description">
+            Heavy-duty industrial work apron crafted from thick, water-resistant canvas with leather accents. Perfect for welding, machining, and workshop operations, offering reliable protection against sparks, oil, and heat.
+        </p>
+        <button class="see-more-btn">See More</button>
+        <div class="product-footer">
+            <button class="buy-btn" data-product="Heavy-Duty Protective Apron">Buy</button>
+        </div>
+    </div>
+</div>
+<!-- ================= END UNIFORM PRODUCTS ================= -->
 
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <!-- Company Logo -->
-            <div class="footer-logo">
-                <img src="assets/images/black.png" alt="Company Logo">
-            </div>
-
-            <div class="footer-content">
-                <div class="footer-section">
+    <footer class="site-footer">
+        <div class="site-footer-container">
+            <div class="site-footer-grid">
+                <!-- Column 1: Brand Info -->
+                <div class="site-footer-brand">
+                    <img src="assets/images/black.png" alt="NS Holdings Engineering Logo" class="site-footer-brand-logo">
+                </div>
+                
+                <!-- Column 2: General Links -->
+                <div class="site-footer-links-col">
                     <h3>General</h3>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Expertise</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Careers</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="expertise.html">Expertise</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="shop.html">Shop</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
+                
+                <!-- Column 3: Expertise Links -->
+                <div class="site-footer-links-col">
                     <h3>Expertise</h3>
                     <ul>
-                        <li><a href="#">Educational Infrastructure</a></li>
-                        <li><a href="#">Healthcare Facilities</a></li>
-                        <li><a href="#">Corporate Office Complexes</a></li>
-                        <li><a href="#">Production Facility Infrastructure</a></li>
-                        <li><a href="#">Landscape & Urbanism</a></li>
+                        <li><a href="expertise.html">Compliance</a></li>
+                        <li><a href="expertise.html">Innovations</a></li>
+                        <li><a href="shop.html">PPE Supply</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
+                
+                <!-- Column 4: Social Links -->
+                <div class="site-footer-links-col">
                     <h3>Social</h3>
                     <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=61565526883201" target="_blank" rel="noopener">Facebook</a></li>
+                        <li><a href="https://www.linkedin.com/company/ns-holdings-engineering-pvt-ltd/" target="_blank" rel="noopener">LinkedIn</a></li>
+                        <li><a href="https://www.youtube.com/@nsholdings2917" target="_blank" rel="noopener">YouTube</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>Copyright © 2025 NS HOLDINGS ENGINEERING (PVT) LTD. Designed by @ZIP SOLUTIONS</p>
+            <div class="site-footer-bottom">
+                <p class="site-footer-copyright">Copyright © 2025 NS HOLDINGS ENGINEERING (PVT) LTD. All Rights Reserved.</p>
+                <p class="site-footer-designed-by">Designed by @ZIP SOLUTIONS</p>
             </div>
         </div>
     </footer>
@@ -857,6 +1064,9 @@
                 });
             }
 
+            const uniformSubFilters = document.getElementById('uniform-sub-filters');
+            const subFilterBtns = document.querySelectorAll('.sub-filter-btn');
+
             // Product filtering
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -865,15 +1075,84 @@
                     
                     const filterValue = this.getAttribute('data-filter');
                     
+                    // Toggle uniform sub-filters display
+                    if (filterValue === 'uniform') {
+                        uniformSubFilters.style.display = 'flex';
+                        // Reset sub-filter to "All Uniforms"
+                        subFilterBtns.forEach(b => b.classList.remove('active'));
+                        uniformSubFilters.querySelector('[data-subfilter="all-uniform"]').classList.add('active');
+                    } else {
+                        uniformSubFilters.style.display = 'none';
+                    }
+                    
                     productCards.forEach(card => {
-                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (filterValue === 'all') {
                             card.style.display = 'block';
+                        } else if (filterValue === 'uniform') {
+                            if (cardCategory && cardCategory.startsWith('uniform')) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
                         } else {
-                            card.style.display = 'none';
+                            if (cardCategory === filterValue) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
                         }
                     });
                 });
             });
+
+            // Sub-filtering for Uniform category
+            subFilterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    subFilterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const subFilterValue = this.getAttribute('data-subfilter');
+                    
+                    productCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (subFilterValue === 'all-uniform') {
+                            if (cardCategory && cardCategory.startsWith('uniform')) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        } else {
+                            if (cardCategory === subFilterValue) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Handle URL category parameters (e.g. shop.html?category=uniform)
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryParam = urlParams.get('category');
+            if (categoryParam) {
+                // Find matching main filter button
+                const mainBtn = document.querySelector(`.filter-btn[data-filter="${categoryParam}"]`);
+                if (mainBtn) {
+                    mainBtn.click();
+                } else {
+                    // Check if it's a sub-filter (e.g. uniform-cap)
+                    const subBtn = document.querySelector(`.sub-filter-btn[data-subfilter="${categoryParam}"]`);
+                    if (subBtn) {
+                        const uniformBtn = document.querySelector('.filter-btn[data-filter="uniform"]');
+                        if (uniformBtn) {
+                            uniformBtn.click();
+                        }
+                        subBtn.click();
+                    }
+                }
+            }
 
             // See More functionality
             seeMoreBtns.forEach(btn => {

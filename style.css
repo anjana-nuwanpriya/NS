@@ -1199,7 +1199,7 @@
 
 
     .expertise {
-      background: url("assets/images/pexels-roger-brown-3435524-5125690.jpeg") no-repeat center center/cover;
+      background: url("assets/images/Expertise.jpg") no-repeat center center/cover;
     }
 
     .projects {
@@ -1214,5 +1214,157 @@
     display: block;
     margin: 0 auto;   /* center the icon */
      opacity: 0.6;
+}
+
+/* ==========================================================================
+   PREMIUM REDESIGNED SITE FOOTER SYSTEM
+   ========================================================================== */
+.site-footer {
+    background: #fafafa;
+    border-top: 1px solid #e5e7eb;
+    padding: 4rem 0 2rem;
+    color: #6b7280;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.site-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.site-footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+    align-items: start;
+}
+
+.site-footer-brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.site-footer-brand-logo {
+    max-width: 250px;
+    height: auto;
+    object-fit: contain;
+    margin-left: -8px; /* Visual alignment */
+}
+
+.site-footer-links-col h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #111827;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.site-footer-links-col h3::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 20px;
+    height: 2px;
+    background: linear-gradient(135deg, #ABABAB 0%, #764ba2 100%);
+}
+
+.site-footer-links-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.site-footer-links-col ul li {
+    margin: 0;
+}
+
+.site-footer-links-col ul li a {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.site-footer-links-col ul li a:hover {
+    color: #764ba2;
+    transform: translateX(3px);
+}
+
+.site-footer-bottom {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.site-footer-bottom p {
+    margin: 0;
+}
+
+.site-footer-copyright {
+    color: #9ca3af;
+}
+
+.site-footer-designed-by {
+    color: #9ca3af;
+}
+
+/* Responsive Redesigned Footer */
+@media screen and (max-width: 1024px) {
+    .site-footer-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 3rem;
+    }
+    .site-footer-brand {
+        grid-column: span 3;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .site-footer {
+        padding: 3rem 0 2rem;
+    }
+    .site-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    .site-footer-brand {
+        grid-column: span 1;
+        align-items: center;
+    }
+    .site-footer-brand-logo {
+        margin-left: 0;
+        max-width: 220px;
+    }
+    .site-footer-links-col h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .site-footer-links-col ul li a:hover {
+        transform: none;
+    }
+    .site-footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
 }
 
