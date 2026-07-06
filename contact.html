@@ -897,7 +897,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar solid-nav">
         <div class="nav-container">
             <div class="logo-section">
                 <a href="index.html">
@@ -971,7 +971,7 @@
         
         <div class="contact-grid">
             <article class="contact-details-card fade-in">
-                <h2>Let's Discuss Your Project</h2>
+                <h2 class="premium-title">Let's Discuss Your Project</h2>
                 <p>We're here to help transform your vision into reality. Our team of experienced engineers and architects are ready to provide comprehensive solutions for your construction and infrastructure needs.</p>
                 
                 <div class="contact-item">
@@ -1022,7 +1022,7 @@
             </article>
 
             <article class="contact-form-card fade-in">
-                <h2>Send Us a Message</h2>
+                <h2 class="premium-title">Send Us a Message</h2>
                 <form class="contact-form" id="contactForm" novalidate>
                     <div class="form-row">
                         <div class="form-group">
@@ -1335,5 +1335,17 @@
             });
         });
     </script>
+
+<script>
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+</script>
+
 </body>
 </html>

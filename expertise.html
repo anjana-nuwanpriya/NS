@@ -584,7 +584,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar solid-nav">
         <div class="nav-container">
             <div class="logo-section">
                 <a href="index.html">
@@ -613,7 +613,7 @@
     <section class="expertise-hero">
         <div class="expertise-hero-content">
             <h1>Our Expertise</h1>
-            <h2>Engineering Excellence & Compliance</h2>
+            <h2 class="premium-title">Engineering Excellence & Compliance</h2>
             <p>Our projects are spearheaded by a team of highly skilled, university-graduated professionals who bring technical expertise and precision to every engagement. We specialize in integrating rigorous Risk Assessment and Occupational Safety and Health (OSH) training into our engineering and compliance consulting services.</p>
         </div>
     </section>
@@ -764,5 +764,17 @@
             observer.observe(section);
         });
     </script>
+
+<script>
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+</script>
+
 </body>
 </html>

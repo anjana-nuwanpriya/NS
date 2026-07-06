@@ -911,7 +911,7 @@
         <div class="scroll-progress" id="scroll-progress"></div>
     </div>
 
- <nav class="navbar">
+ <nav class="navbar solid-nav">
     <div class="nav-container">
         <!-- Logo links to index.html -->
         <div class="logo-section">
@@ -1384,5 +1384,17 @@
     document.querySelector('.nav-menu').classList.toggle('active');
 });
     </script>
-    </body>
+    
+<script>
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+</script>
+
+</body>
 </html>

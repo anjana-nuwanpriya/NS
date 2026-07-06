@@ -1220,7 +1220,7 @@
     <!-- ========== PRODUCT CATEGORY SLIDER ========== -->
     <section class="product-slider-section">
         <div class="section-header">
-            <h2>Our Products</h2>
+            <h2 class="premium-title">Our Products</h2>
         </div>
         
         <div class="product-slider">
@@ -1714,5 +1714,17 @@
 })();
 // ========== END PRODUCT CATEGORY SLIDER ==========
     </script>
+
+<script>
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+</script>
+
 </body>
 </html>
