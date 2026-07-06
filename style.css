@@ -38,7 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 
         /* Navigation */
 .navbar {
-    position: absolute;
+    position: fixed;
     margin-top: 0;
     top: 0;
     width: 100%;
@@ -131,6 +131,7 @@ h1, h2, h3, h4, h5, h6 {
         /* Hero Section */
    .hero {
     height: 100vh;
+    background: #0a0a0a;
     position: relative;
     display: flex;
     align-items: center;
