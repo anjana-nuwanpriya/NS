@@ -213,6 +213,17 @@
             line-height: 1.6;
         }
 
+        /* Override the shared dark-to-red gradient title so it stays fully
+           legible over the hero photo instead of fading to near-black */
+        .expertise-hero-content h1,
+        .expertise-hero-content .premium-title {
+            color: #ffffff;
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+            -webkit-text-fill-color: #ffffff;
+        }
+
         /* =========================
            EXPERTISE CONTENT
         ========================= */
