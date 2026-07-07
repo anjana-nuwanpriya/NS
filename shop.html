@@ -492,7 +492,7 @@
                 <button class="sub-filter-btn" data-subfilter="uniform-cap">Cap</button>
                 <button class="sub-filter-btn" data-subfilter="uniform-overall">Overall</button>
                 <button class="sub-filter-btn" data-subfilter="uniform-jacket">Jacket</button>
-                <button class="sub-filter-btn" data-subfilter="uniform-t-shirt">T shirt</button>
+                <button class="sub-filter-btn" data-subfilter="uniform-t-shirt">Shirt/T Shirt</button>
                 <button class="sub-filter-btn" data-subfilter="uniform-apron">Apron</button>
             </div>
             
@@ -1025,24 +1025,37 @@
                         uniformSubFilters.style.display = 'none';
                     }
                     
-                    productCards.forEach(card => {
+                    productCards.forEach((card, index) => {
                         const cardCategory = card.getAttribute('data-category');
                         if (filterValue === 'all') {
-                            card.style.display = 'block';
+                            card.style.display = 'flex';
                         } else if (filterValue === 'uniform') {
                             if (cardCategory && cardCategory.startsWith('uniform')) {
-                                card.style.display = 'block';
+                                card.style.display = 'flex';
                             } else {
                                 card.style.display = 'none';
                             }
                         } else {
                             if (cardCategory === filterValue) {
-                                card.style.display = 'block';
+                                card.style.display = 'flex';
                             } else {
                                 card.style.display = 'none';
                             }
                         }
                     });
+
+// Re-apply animations with stagger
+let visibleCount = 0;
+productCards.forEach(card => {
+    if (card.style.display !== 'none') {
+        card.style.animation = 'none';
+        card.offsetHeight; /* trigger reflow */
+        card.style.animation = null; 
+        card.style.animationDelay = (visibleCount * 0.1) + 's';
+        visibleCount++;
+    }
+});
+
                 });
             });
 
@@ -1054,22 +1067,35 @@
                     
                     const subFilterValue = this.getAttribute('data-subfilter');
                     
-                    productCards.forEach(card => {
+                    productCards.forEach((card, index) => {
                         const cardCategory = card.getAttribute('data-category');
                         if (subFilterValue === 'all-uniform') {
                             if (cardCategory && cardCategory.startsWith('uniform')) {
-                                card.style.display = 'block';
+                                card.style.display = 'flex';
                             } else {
                                 card.style.display = 'none';
                             }
                         } else {
                             if (cardCategory === subFilterValue) {
-                                card.style.display = 'block';
+                                card.style.display = 'flex';
                             } else {
                                 card.style.display = 'none';
                             }
                         }
                     });
+
+// Re-apply animations with stagger
+let visibleCount = 0;
+productCards.forEach(card => {
+    if (card.style.display !== 'none') {
+        card.style.animation = 'none';
+        card.offsetHeight; /* trigger reflow */
+        card.style.animation = null; 
+        card.style.animationDelay = (visibleCount * 0.1) + 's';
+        visibleCount++;
+    }
+});
+
                 });
             });
 
