@@ -10,14 +10,14 @@
     <title>NS HOLDINGS ENGINEERING (PVT) LTD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* MINIMAL PROFESSIONAL LOADING SCREEN STYLES */
+        /* MODERN PROFESSIONAL LOADING SCREEN STYLES */
         .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: #0a0a0a; /* Modern dark background */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,7 +25,7 @@
             z-index: 9999;
             opacity: 1;
             visibility: visible;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.8s cubic-bezier(0.8, 0, 0.2, 1), visibility 0.8s;
         }
 
         .loading-screen.hidden {
@@ -40,21 +40,49 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            width: 160px;
+            height: 160px;
         }
 
         .premium-logo {
-            width: 180px;
+            width: 120px;
             height: auto;
-            margin-bottom: 40px;
             object-fit: contain;
-            opacity: 0;
-            animation: elegantFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            z-index: 2;
+            animation: pulseLogo 2s infinite ease-in-out;
         }
 
-        @keyframes elegantFadeIn {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .spinner-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-top: 2px solid #e63946; /* Brand red color */
+            border-right: 2px solid transparent;
+            border-radius: 50%;
+            animation: spinRing 1.5s linear infinite;
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        @keyframes spinRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .premium-progress-container {
@@ -62,44 +90,55 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             opacity: 0;
-            animation: elegantFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+            animation: elegantFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+        }
+
+        @keyframes elegantFadeIn {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .progress-bar-container {
             width: 100%;
-            height: 2px;
-            background: #f0f0f0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
-            border-radius: 2px;
+            border-radius: 4px;
         }
 
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: #111111;
+            background: linear-gradient(90deg, #e63946, #ff4d5a); /* Red gradient */
             position: absolute;
             left: 0;
             top: 0;
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(230, 57, 70, 0.6);
         }
 
         .loading-percentage {
-            color: #666666;
-            font-size: 11px;
+            color: #888888;
+            font-size: 12px;
             font-weight: 500;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-family: 'Inter', sans-serif;
         }
 
         @media (max-width: 480px) {
+            .logo-wrapper {
+                width: 130px;
+                height: 130px;
+                margin-bottom: 40px;
+            }
             .premium-logo {
-                width: 140px;
-                margin-bottom: 30px;
+                width: 90px;
             }
             .loading-container {
-                max-width: 240px;
+                max-width: 250px;
             }
         }
 
@@ -1151,7 +1190,10 @@
     <!-- LOADING SCREEN -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-container">
-            <img src="assets/images/black.png" alt="NS Holdings Logo" class="premium-logo">
+            <div class="logo-wrapper">
+                <img src="assets/images/logo (1).png" alt="NS Holdings Logo" class="premium-logo">
+                <div class="spinner-ring"></div>
+            </div>
             
             <div class="premium-progress-container">
                 <div class="progress-bar-container">
